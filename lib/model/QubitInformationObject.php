@@ -339,11 +339,11 @@ class QubitInformationObject extends BaseInformationObject
         $statement = $connection->prepare($sql);
         $statement->execute();
         $maxLft = $statement->fetchColumn();
-  
+
         $sql  = 'UPDATE '.QubitInformationObject::TABLE_NAME;
         $sql .= ' SET '.QubitInformationObject::LFT.' = '.($maxLft + 1);
         $sql .= ' WHERE '.QubitInformationObject::ID.' = '.$this->id;
-          
+
         $connection->exec($sql);
 
         $connection->commit();
@@ -425,9 +425,10 @@ class QubitInformationObject extends BaseInformationObject
     $this->removeKeymapEntries();
 
     // Delete finding aid
-    if (null !== $path = arFindingAidJob::getFindingAidPathForDownload($this->id))
+    $findingAid = new QubitFindingAid($this);
+    if (!empty($findingAid->getPath()))
     {
-      unlink($path);
+      unlink($findingAid->getPath());
     }
 
     QubitSearch::getInstance()->delete($this);
@@ -832,21 +833,6 @@ class QubitInformationObject extends BaseInformationObject
   public function getCollectionRoot()
   {
     return $this->ancestors->andSelf()->orderBy('lft')->__get(1);
-  }
-
-  public function getFindingAidStatus()
-  {
-    $criteria = new Criteria;
-    $criteria->add(QubitProperty::OBJECT_ID, $this->id);
-    $criteria->add(QubitProperty::NAME, 'findingAidStatus');
-    $property = QubitProperty::getOne($criteria);
-
-    if (!isset($property))
-    {
-      return;
-    }
-
-    return $property->getValue(array('sourceCulture'=>true));
   }
 
   public function setRoot()

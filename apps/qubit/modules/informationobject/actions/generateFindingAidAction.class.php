@@ -36,7 +36,8 @@ class InformationObjectGenerateFindingAidAction extends sfAction
     }
 
     // Check if a finding aid file already exists
-    if (null !== arFindingAidJob::getFindingAidPathForDownload($this->resource->id))
+    $findingAid = new QubitFindingAid($this->resource);
+    if (!empty($findingAid->getPath()))
     {
       $this->redirect(array($this->resource, 'module' => 'informationobject'));
     }

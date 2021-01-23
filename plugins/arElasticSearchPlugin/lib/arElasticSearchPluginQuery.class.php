@@ -473,13 +473,13 @@ class arElasticSearchPluginQuery
 
           case 'generated':
             $query = new \Elastica\Query\Term;
-            $query->setTerm('findingAid.status', arFindingAidJob::GENERATED_STATUS);
+            $query->setTerm('findingAid.status', QubitFindingAid::GENERATED_STATUS);
 
             return $query;
 
           case 'uploaded':
             $query = new \Elastica\Query\Term;
-            $query->setTerm('findingAid.status', arFindingAidJob::UPLOADED_STATUS);
+            $query->setTerm('findingAid.status', QubitFindingAid::UPLOADED_STATUS);
 
             return $query;
         }

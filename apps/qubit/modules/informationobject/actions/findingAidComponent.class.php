@@ -21,21 +21,26 @@ class InformationObjectFindingAidComponent extends sfComponent
 {
   public function execute($request)
   {
+    $this->showDownload = false;
+    $this->showStatus = false;
+    $this->showUpload = false;
+    $this->showGenerate = false;
+    $this->showDelete = false;
+
     // Get finding aid data from top-level
     if ($this->resource->parentId != QubitInformationObject::ROOT_ID)
     {
       $this->resource = $this->resource->getCollectionRoot();
     }
 
-    $this->showDownload = $this->showStatus = $this->showUpload = $this->showGenerate = $this->showDelete = false;
-
-    $this->path = arFindingAidJob::getFindingAidPathForDownload($this->resource->id);
+    $findingAid = new QubitFindingAid($this->resource);
 
     // Public users can only see the download link if the file exists
     if (!$this->getUser()->isAuthenticated())
     {
-      if (isset($this->path))
+      if (!empty($findingAid->getPath()))
       {
+        $this->path = $findingAid->getPath();
         $this->showDownload = true;
 
         return;
@@ -53,8 +58,9 @@ class InformationObjectFindingAidComponent extends sfComponent
     if (!isset($lastJobStatus))
     {
       // Edge case where the job status is missing but the file exists,
-      if (isset($this->path))
+      if (!empty($findingAid->getPath()))
       {
+        $this->path = $findingAid->getPath();
         $this->showDownload = true;
 
         // Check ACL to show delete option
@@ -77,7 +83,7 @@ class InformationObjectFindingAidComponent extends sfComponent
     $i18n = $this->context->i18n;
 
     // If there is a job in progress, show only status
-    if ($lastJobStatus == QubitTerm::JOB_STATUS_IN_PROGRESS_ID)
+    if (QubitTerm::JOB_STATUS_IN_PROGRESS_ID == $lastJobStatus)
     {
       $this->showStatus = true;
       $this->status = $i18n->__('In progress');
@@ -86,7 +92,7 @@ class InformationObjectFindingAidComponent extends sfComponent
     }
 
     // If the last job failed, show error status and allowed actions
-    if ($lastJobStatus == QubitTerm::JOB_STATUS_ERROR_ID)
+    if (QubitTerm::JOB_STATUS_ERROR_ID == $lastJobStatus)
     {
       $this->showStatus = true;
       $this->showActions();
@@ -96,13 +102,11 @@ class InformationObjectFindingAidComponent extends sfComponent
     }
 
     // If the last job completed, get finding aid status property
-    if ($lastJobStatus == QubitTerm::JOB_STATUS_COMPLETED_ID)
+    if (QubitTerm::JOB_STATUS_COMPLETED_ID == $lastJobStatus)
     {
-      $findingAidStatus = $this->resource->getFindingAidStatus();
-
       // If the property is missing, the finding aid was deleted,
       // show allowed actions or nothing
-      if (!isset($findingAidStatus))
+      if (empty($findingAid->getStatus()))
       {
         if (!$this->showActions())
         {
@@ -114,7 +118,7 @@ class InformationObjectFindingAidComponent extends sfComponent
 
       // If the property is set but the file is missing,
       // show status and allowed actions
-      if (!isset($this->path))
+      if (empty($findingAid->getPath()))
       {
         $this->showStatus = true;
         $this->showActions();
@@ -124,16 +128,18 @@ class InformationObjectFindingAidComponent extends sfComponent
       }
 
       // Show status and download link
-      $this->showStatus = $this->showDownload = true;
+      $this->showStatus = true;
+      $this->showDownload = true;
+      $this->path = $findingAid->getPath();
 
-      switch ((integer)$findingAidStatus)
+      switch ((integer) $findingAid->getStatus())
       {
-        case arFindingAidJob::GENERATED_STATUS:
+        case QubitFindingAid::GENERATED_STATUS:
           $this->status = $i18n->__('Generated');
 
           break;
 
-        case arFindingAidJob::UPLOADED_STATUS:
+        case QubitFindingAid::UPLOADED_STATUS:
           $this->status = $i18n->__('Uploaded');
 
           break;

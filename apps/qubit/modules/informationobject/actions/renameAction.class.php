@@ -105,7 +105,8 @@ class InformationObjectRenameAction extends DefaultEditAction
     if (null !== $postedSlug)
     {
       $slug = QubitSlug::getByObjectId($this->resource->id);
-      $findingAidPath = arFindingAidJob::getFindingAidPath($this->resource->id);
+      $findingAid = new QubitFindingAid($this->resource);
+      $findingAidPath = $findingAid->getPath();
 
       // Attempt to change slug if submitted slug's different than current slug
       if ($postedSlug != $slug->slug)
@@ -113,11 +114,23 @@ class InformationObjectRenameAction extends DefaultEditAction
         $slug->slug = InformationObjectSlugPreviewAction::determineAvailableSlug($postedSlug, $this->resource->id);
         $slug->save();
 
+        // Explicitly update resource slug, so the new slug is used to generate
+        // the new Finding Aid filename
+        $this->resource->slug = $slug->slug;
+
         // Update finding aid filename
-        $newFindingAidPath = arFindingAidJob::getFindingAidPath($this->resource->id);
+        $newFindingAidPath = QubitFindingAidGenerator::generatePath(
+          $this->resource
+        );
+
         if (false === rename($findingAidPath, $newFindingAidPath))
         {
-          $message = sprintf('Finding aid document could not be renamed according to new slug (old=%s, new=%s)', $findingAidPath, $newFindingAidPath);
+          $message = sprintf(
+            'Finding aid document could not be renamed according to new slug'.
+            '(old=%s, new=%s)',
+            $findingAidPath,
+            $newFindingAidPath
+          );
           $this->logMessage($message, 'warning');
         }
       }
