@@ -49,6 +49,8 @@ class arElasticSearchInformationObject extends arElasticSearchModelBase
     ));
 
     // Recursively descend down hierarchy
+    $this->loadTree(QubitInformationObject::ROOT_ID);
+
     $this->recursivelyAddInformationObjects(
       QubitInformationObject::ROOT_ID,
       $this->count,
@@ -61,7 +63,7 @@ class arElasticSearchInformationObject extends arElasticSearchModelBase
   public function recursivelyAddInformationObjects($parentId, $totalRows, $options = array())
   {
     // Loop through children and add to search index
-    foreach (self::getChildren($parentId) as $item)
+    foreach ($this->tree[$parentId] as $id)
     {
       $ancestors = $inheritedCreators = array();
       $repository = null;
@@ -69,7 +71,7 @@ class arElasticSearchInformationObject extends arElasticSearchModelBase
 
       try
       {
-        $node = new arElasticSearchInformationObjectPdo($item->id, $options);
+        $node = new arElasticSearchInformationObjectPdo($id, $options);
         $data = $node->serialize();
 
         QubitSearch::getInstance()->addDocument($data, 'QubitInformationObject');
@@ -90,10 +92,10 @@ class arElasticSearchInformationObject extends arElasticSearchModelBase
       }
 
       // Descend hierarchy
-      if (1 < ($item->rgt - $item->lft))
+      if (count($this->tree[$id]))
       {
         // Pass ancestors, repository and creators down to descendants
-        $this->recursivelyAddInformationObjects($item->id, $totalRows, array(
+        $this->recursivelyAddInformationObjects($id, $totalRows, array(
           'ancestors'  => $ancestors,
           'repository' => $repository,
           'inheritedCreators' => $inheritedCreators
@@ -173,5 +175,37 @@ class arElasticSearchInformationObject extends arElasticSearchModelBase
     $children = self::$statement->fetchAll(PDO::FETCH_OBJ);
 
     return $children;
+  }
+
+  public function loadTree($parentId)
+  {
+    if (!isset(self::$conn))
+    {
+      self::$conn = Propel::getConnection();
+    }
+
+    // Loop through hierarchy and add to search index
+    $sql = "WITH RECURSIVE cte (id, parent_id, level) AS (
+              SELECT id, parent_id, 1 AS level FROM information_object WHERE parent_id = ?
+              UNION ALL
+              SELECT i.id, i.parent_id, level + 1 AS level FROM information_object i
+              INNER JOIN cte ON i.parent_id = cte.id
+            )
+            SELECT * FROM cte";
+
+    $statement = self::$conn->prepare($sql);
+    $statement->execute(array($parentId));
+
+    $children = $statement->fetchAll(PDO::FETCH_OBJ);
+
+    $this->tree = [1 => []];
+
+    foreach($children as $item)
+    {
+      $this->tree[$item->id] = [];
+      $this->tree[$item->parent_id][] = $item->id;
+    }
+
+    print_r($this->tree);
   }
 }
