@@ -209,6 +209,11 @@ class arElasticSearchInformationObject extends arElasticSearchModelBase
       self::$conn = Propel::getConnection();
     }
 
+    // Create table if it doesn't exist
+    $sql = "CREATE TABLE IF NOT EXISTS indexing_sequence (id int, parent_id int)";
+    $statement = self::$conn->prepare($sql);
+    $statement->execute();
+
     // Delete existing sequence
     $sql  = 'DELETE FROM indexing_sequence';
     $statement = self::$conn->prepare($sql);
