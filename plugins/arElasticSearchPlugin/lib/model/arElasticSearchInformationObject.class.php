@@ -25,6 +25,7 @@ class arElasticSearchInformationObject extends arElasticSearchModelBase
     $counter = 0;
 
   protected
+    $parents = array(),
     $errors = array();
 
   public function load()
@@ -63,8 +64,10 @@ class arElasticSearchInformationObject extends arElasticSearchModelBase
   public function recursivelyAddInformationObjects($parentId, $totalRows, $options = array())
   {
     // Loop through children and add to search index
-    foreach ($this->tree[$parentId] as $id)
+    foreach (self::getCachedChildren($parentId) as $item)
     {
+      $id = $item->id;
+
       $ancestors = $inheritedCreators = array();
       $repository = null;
       self::$counter++;
@@ -92,7 +95,7 @@ class arElasticSearchInformationObject extends arElasticSearchModelBase
       }
 
       // Descend hierarchy
-      if (count($this->tree[$id]))
+      if (array_search($id, $this->parents))
       {
         // Pass ancestors, repository and creators down to descendants
         $this->recursivelyAddInformationObjects($id, $totalRows, array(
@@ -177,6 +180,28 @@ class arElasticSearchInformationObject extends arElasticSearchModelBase
     return $children;
   }
 
+  public static function getCachedChildren($parentId)
+  {
+    if (!isset(self::$conn))
+    {
+      self::$conn = Propel::getConnection();
+    }
+
+    #if (!isset(self::$statement))
+    #{
+      $sql  = 'SELECT id';
+      $sql .= ' FROM indexing_sequence';
+      $sql .= ' WHERE parent_id = ?';
+
+      $statement = self::$conn->prepare($sql);
+    #}
+
+    $statement->execute(array($parentId));
+    $children = $statement->fetchAll(PDO::FETCH_OBJ);
+
+    return $children;
+  }
+
   public function loadTree($parentId)
   {
     if (!isset(self::$conn))
@@ -184,11 +209,17 @@ class arElasticSearchInformationObject extends arElasticSearchModelBase
       self::$conn = Propel::getConnection();
     }
 
+    // Delete existing sequence
+    $sql  = 'DELETE FROM indexing_sequence';
+    $statement = self::$conn->prepare($sql);
+    $statement->execute();
+
     // Loop through hierarchy and add to search index
-    $sql = "WITH RECURSIVE cte (id, parent_id, level) AS (
-              SELECT id, parent_id, 1 AS level FROM information_object WHERE parent_id = ?
+    $sql = "INSERT INTO indexing_sequence
+            WITH RECURSIVE cte (id, parent_id) AS (
+              SELECT id, parent_id FROM information_object WHERE parent_id = 1
               UNION ALL
-              SELECT i.id, i.parent_id, level + 1 AS level FROM information_object i
+              SELECT i.id, i.parent_id FROM information_object i
               INNER JOIN cte ON i.parent_id = cte.id
             )
             SELECT * FROM cte";
@@ -196,16 +227,16 @@ class arElasticSearchInformationObject extends arElasticSearchModelBase
     $statement = self::$conn->prepare($sql);
     $statement->execute(array($parentId));
 
-    $children = $statement->fetchAll(PDO::FETCH_OBJ);
+    // Cache parents
+    $sql = "SELECT DISTINCT parent_id FROM indexing_sequence";
 
-    $this->tree = [1 => []];
+    $statement = self::$conn->prepare($sql);
+    $statement->execute();
+    $parents = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-    foreach($children as $item)
+    foreach ($parents as $row)
     {
-      $this->tree[$item->id] = [];
-      $this->tree[$item->parent_id][] = $item->id;
+      $this->parents[] = $row['parent_id'];
     }
-
-    print_r($this->tree);
   }
 }
