@@ -21,7 +21,7 @@ class arElasticSearchInformationObject extends arElasticSearchModelBase
 {
   protected static
     $conn,
-    $statement,
+    $statements = [],
     $counter = 0;
 
   protected
@@ -161,7 +161,7 @@ class arElasticSearchInformationObject extends arElasticSearchModelBase
       self::$conn = Propel::getConnection();
     }
 
-    if (!isset(self::$statement))
+    if (!isset(self::$statements['getChildren']))
     {
       $sql  = 'SELECT
                   io.id,
@@ -171,11 +171,11 @@ class arElasticSearchInformationObject extends arElasticSearchModelBase
       $sql .= ' WHERE io.parent_id = ?';
       $sql .= ' ORDER BY io.lft';
 
-      self::$statement = self::$conn->prepare($sql);
+      self::$statements['children'] = self::$conn->prepare($sql);
     }
 
-    self::$statement->execute(array($parentId));
-    $children = self::$statement->fetchAll(PDO::FETCH_OBJ);
+    self::$statements['getChildren']->execute(array($parentId));
+    $children = self::$statements['getChildren']->fetchAll(PDO::FETCH_OBJ);
 
     return $children;
   }
@@ -187,17 +187,17 @@ class arElasticSearchInformationObject extends arElasticSearchModelBase
       self::$conn = Propel::getConnection();
     }
 
-    #if (!isset(self::$statement))
-    #{
+    if (!isset(self::$statements['getCachedChildren']))
+    {
       $sql  = 'SELECT id';
       $sql .= ' FROM indexing_sequence';
       $sql .= ' WHERE parent_id = ?';
 
-      $statement = self::$conn->prepare($sql);
-    #}
+      $statements['getCachedChildren'] = self::$conn->prepare($sql);
+    }
 
-    $statement->execute(array($parentId));
-    $children = $statement->fetchAll(PDO::FETCH_OBJ);
+    $statements['getCachedChildren']->execute(array($parentId));
+    $children = $statements['getCachedChildren']->fetchAll(PDO::FETCH_OBJ);
 
     return $children;
   }
