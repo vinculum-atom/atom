@@ -217,6 +217,21 @@ class QubitFindingAidGenerator
      */
     public function generate()
     {
+        // Delete existing finding aid linked to this resource
+        $findingAid = new QubitFindingAid($this->resource);
+
+        if (null !== $findingAid->getPath())
+        {
+            $this->logger->info(
+                sprintf(
+                    'Deleting existing finding aid (%s)',
+                    $findingAid->getPath()
+                )
+            );
+
+            $findingAid->delete();
+        }
+
         $this->logger->info(
             sprintf('Generating finding aid (%s)...', $this->resource->slug)
         );
@@ -270,7 +285,7 @@ class QubitFindingAidGenerator
             return null;
         }
 
-        $filepath =    QubitInformationObjectXmlCache::resourceExportFilePath(
+        $filepath = QubitInformationObjectXmlCache::resourceExportFilePath(
             $resource, self::XML_STANDARD
         );
 
@@ -480,7 +495,7 @@ EOL;
         {
             $this->logger->err(
                 sprintf(
-                    'Converting the FO to a %s file has failed.',
+                    'Converting the XSL-FO document to a %s file has failed.',
                     $this->getFormat()
                 )
             );
