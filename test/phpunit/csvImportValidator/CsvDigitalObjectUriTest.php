@@ -4,9 +4,9 @@ use org\bovigo\vfs\vfsStream;
 
 /**
  * @internal
- * @covers \CsvDigitalObjectPathValidator
+ * @covers \CsvDigitalObjectUriValidator
  */
-class CsvDigitalObjectTest extends \PHPUnit\Framework\TestCase
+class CsvDigitalObjectUriTest extends \PHPUnit\Framework\TestCase
 {
     protected $vdbcon;
     protected $context;
@@ -92,111 +92,6 @@ class CsvDigitalObjectTest extends \PHPUnit\Framework\TestCase
         $vfsUrl = 'vfs://root';
 
         return [
-            /*
-             * Test CsvDigitalObjectPathValidator.class.php
-             *
-             * Tests:
-             * - digitalObjectPath column missing
-             * - digitalObjectPath column present but empty
-             * - digitalObjectPath column present and populated with:
-             * -- valid file path
-             * -- duplicated file path
-             * -- invalid file path
-             * -- empty value
-             * -- digitalObjectUri column present and populated
-             */
-            [
-                'CsvDigitalObjectPathValidator-digitalObjectPathMissing' => [
-                    'csvValidatorClasses' => ['CsvDigitalObjectPathValidator' => CsvDigitalObjectPathValidator::class],
-                    'filename' => '/unix_csv_without_utf8_bom.csv',
-                    'testname' => 'CsvDigitalObjectPathValidator',
-                    'validatorOptions' => [
-                        'verbose' => true,
-                    ],
-                    CsvValidatorResult::TEST_TITLE => CsvDigitalObjectPathValidator::TITLE,
-                    CsvValidatorResult::TEST_STATUS => CsvValidatorResult::RESULT_INFO,
-                    CsvValidatorResult::TEST_RESULTS => [
-                        "Column 'digitalObjectPath' not present in CSV. Nothing to verify.",
-                    ],
-                    CsvValidatorResult::TEST_DETAIL => [
-                    ],
-                ],
-            ],
-
-            [
-                'CsvDigitalObjectPathValidator-digitalObjectPathEmpty' => [
-                    'csvValidatorClasses' => ['CsvDigitalObjectPathValidator' => CsvDigitalObjectPathValidator::class],
-                    'filename' => '/unix_csv_with_digital_object_cols.csv',
-                    'testname' => 'CsvDigitalObjectPathValidator',
-                    'validatorOptions' => [
-                        'verbose' => true,
-                    ],
-                    CsvValidatorResult::TEST_TITLE => CsvDigitalObjectPathValidator::TITLE,
-                    CsvValidatorResult::TEST_STATUS => CsvValidatorResult::RESULT_INFO,
-                    CsvValidatorResult::TEST_RESULTS => [
-                        "Column 'digitalObjectPath' found.",
-                        'Digital object folder location not specified.',
-                    ],
-                    CsvValidatorResult::TEST_DETAIL => [
-                    ],
-                ],
-            ],
-
-            [
-                'CsvDigitalObjectPathValidator-digitalObjectPathEmptyWithDOFolder' => [
-                    'csvValidatorClasses' => ['CsvDigitalObjectPathValidator' => CsvDigitalObjectPathValidator::class],
-                    'filename' => '/unix_csv_with_digital_object_cols.csv',
-                    'testname' => 'CsvDigitalObjectPathValidator',
-                    'validatorOptions' => [
-                        'source' => 'testsourcefile.csv',
-                        'className' => 'QubitInformationObject',
-                        'className' => 'QubitInformationObject',
-                        'pathToDigitalObjects' => 'vfs://root/digital_objects',
-                        'verbose' => true,
-                    ],
-                    CsvValidatorResult::TEST_TITLE => CsvDigitalObjectPathValidator::TITLE,
-                    CsvValidatorResult::TEST_STATUS => CsvValidatorResult::RESULT_INFO,
-                    CsvValidatorResult::TEST_RESULTS => [
-                        "Column 'digitalObjectPath' found.",
-                        "Column 'digitalObjectPath' is empty.",
-                    ],
-                    CsvValidatorResult::TEST_DETAIL => [
-                    ],
-                ],
-            ],
-
-            [
-                'CsvDigitalObjectPathValidator-digitalObjectPathPopulatedWithDOFolder' => [
-                    'csvValidatorClasses' => ['CsvDigitalObjectPathValidator' => CsvDigitalObjectPathValidator::class],
-                    'filename' => '/unix_csv_with_digital_object_cols_populated.csv',
-                    'testname' => 'CsvDigitalObjectPathValidator',
-                    'validatorOptions' => [
-                        'source' => 'testsourcefile.csv',
-                        'className' => 'QubitInformationObject',
-                        'className' => 'QubitInformationObject',
-                        'pathToDigitalObjects' => 'vfs://root/digital_objects',
-                        'verbose' => true,
-                    ],
-                    CsvValidatorResult::TEST_TITLE => CsvDigitalObjectPathValidator::TITLE,
-                    CsvValidatorResult::TEST_STATUS => CsvValidatorResult::RESULT_ERROR,
-                    CsvValidatorResult::TEST_RESULTS => [
-                        "Column 'digitalObjectPath' found.",
-                        "'digitalObjectPath' will be overridden by 'digitalObjectUri' if both are populated.",
-                        "'digitalObjectPath' values that will be overridden by digitalObjectUri: 2",
-                        'Number of duplicated digital object paths found in CSV: 2',
-                        'Digital objects in folder not referenced by CSV: 1',
-                        'Digital object referenced by CSV not found in folder: 2',
-                    ],
-                    CsvValidatorResult::TEST_DETAIL => [
-                        "Number of duplicates for path 'a.png': 2",
-                        "Number of duplicates for path 'b.png': 2",
-                        'Unreferenced digital object: c.png',
-                        'Unable to locate digital object: vfs://root/digital_objects/A.PNG',
-                        'Unable to locate digital object: vfs://root/digital_objects/d.png',
-                    ],
-                ],
-            ],
-
             /*
              * Test CsvDigitalObjectUriValidator.class.php
              *
