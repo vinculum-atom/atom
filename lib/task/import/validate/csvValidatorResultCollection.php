@@ -95,49 +95,61 @@ class CsvValidatorResultCollection
         uasort($this->results, ['CsvValidatorResultCollection', 'compare']);
     }
 
-    public static function renderResultsAsText(CsvValidatorResultCollection $results, bool $verbose = false)
+    public static function renderResultsAsText(CsvValidatorResultCollection $results, bool $verbose = false): string
     {
+        $outputString = '';
         $errorCount = $results->getErrorCount();
         $warnCount = $results->getWarnCount();
 
         if (!empty($errorCount)) {
-            printf("\n** Issues have been detected with this CSV that will prevent it from being imported correctly.\n\n");
+            $outputString .= sprintf("\n** Issues have been detected with this CSV that will prevent it from being imported correctly.\n\n");
         } elseif (!empty($warnCount)) {
-            printf("\n** Warnings should be reviewed before proceeding with importing this CSV.\n\n");
+            $outputString .= sprintf("\n** Warnings should be reviewed before proceeding with importing this CSV.\n\n");
         } else {
-            printf("\nNo issues detected.\n\n");
+            $outputString .= sprintf("\nNo issues detected.\n\n");
         }
 
-        printf("Errors: %s\n", $errorCount);
-        printf("Warnings: %s\n", $warnCount);
+        $outputString .= sprintf("Errors: %s\n", $errorCount);
+        $outputString .= sprintf("Warnings: %s\n", $warnCount);
 
         $resultArray = $results->toArray();
 
         foreach ($resultArray as $filename => $fileGroup) {
             $fileStr = sprintf("\nFilename: %s", $filename);
-            printf("%s\n", $fileStr);
-            printf("%s\n", str_repeat('=', strlen($fileStr)));
+            $outputString .= sprintf("%s\n", $fileStr);
+            $outputString .= sprintf("%s\n", str_repeat('=', strlen($fileStr)));
 
             foreach ($fileGroup as $testResult) {
                 if (CsvValidatorResult::RESULT_INFO === $testResult['status'] && !$verbose) {
                     continue;
                 }
-                printf("\n%s - %s\n", $testResult['title'], CsvValidatorResult::formatStatus($testResult['status']));
-                printf("%s\n", str_repeat('-', strlen($testResult['title'])));
-
-                foreach ($testResult['results'] as $line) {
-                    printf("%s\n", $line);
-                }
-
-                if ($verbose && 0 < count($testResult['details'])) {
-                    printf("\nDetails:\n");
-
-                    foreach ($testResult['details'] as $line) {
-                        printf("%s\n", $line);
-                    }
-                }
+                $outputString .= CsvValidatorResultCollection::renderResultArrayAsText($testResult, $verbose);
             }
         }
+
+        return $outputString;
+    }
+
+    protected static function renderResultArrayAsText(array $result, bool $verbose = false): string
+    {
+        $outputString = '';
+
+        $outputString .= sprintf("\n%s - %s\n", $result['title'], CsvValidatorResult::formatStatus($result['status']));
+        $outputString .= sprintf("%s\n", str_repeat('-', strlen($result['title'])));
+
+        foreach ($result['results'] as $line) {
+            $outputString .= sprintf("%s\n", $line);
+        }
+
+        if ($verbose && 0 < count($result['details'])) {
+            $outputString .= sprintf("\nDetails:\n");
+
+            foreach ($result['details'] as $line) {
+                $outputString .= sprintf("%s\n", $line);
+            }
+        }
+
+        return $outputString;
     }
 
     protected function compare($a, $b)
