@@ -106,7 +106,6 @@ class CsvFileEncodingValidator extends CsvBaseValidator
     {
         if ($this->utf8Compatible) {
             $this->testData->addResult('File encoding is UTF-8 compatible.');
-            $this->testData->setStatusInfo();
         } else {
             $this->testData->addResult('File encoding does not appear to be UTF-8 compatible.');
             $this->testData->setStatusError();
@@ -116,7 +115,6 @@ class CsvFileEncodingValidator extends CsvBaseValidator
             switch ($this->utf8BomPresent) {
                 case 'utf8Bom':
                     $this->testData->addResult('This file includes a UTF-8 BOM.');
-                    $this->testData->setStatusInfo();
 
                     break;
 

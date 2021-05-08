@@ -71,13 +71,11 @@ class CsvDigitalObjectUriValidator extends CsvBaseValidator
     public function getTestResult()
     {
         if (false == $this->digitalObjectUriColumnPresent) {
-            $this->testData->setStatusInfo();
             $this->testData->addResult(sprintf("Column 'digitalObjectUri' not present in CSV. Nothing to verify."));
         } else {
             $this->testData->addResult(sprintf("Column 'digitalObjectUri' found."));
 
             if (empty($this->digitalObjectUses)) {
-                $this->testData->setStatusInfo();
                 $this->testData->addResult(sprintf("Column 'digitalObjectUri' is empty."));
             } else {
                 $digitalObjectUrisUsedMoreThanOnce = $this->getUsedMoreThanOnce();

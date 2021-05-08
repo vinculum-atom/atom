@@ -75,7 +75,6 @@ class CsvEmptyRowValidator extends CsvBaseValidator
             $this->testData->addResult(sprintf('CSV blank row count: %s', count($this->blankRowSummary)));
             $this->testData->addDetail(sprintf('Blank row numbers: %s', implode(', ', $this->blankRowSummary)));
         } else {
-            $this->testData->setStatusInfo();
             $this->testData->addResult(sprintf('CSV does not have any blank rows.'));
         }
 

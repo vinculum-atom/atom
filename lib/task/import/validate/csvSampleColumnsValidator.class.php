@@ -60,8 +60,6 @@ class CsvSampleValuesValidator extends CsvBaseValidator
 
     public function getTestResult()
     {
-        $this->testData->setStatusInfo();
-
         foreach ($this->values as $columnName => $sampleValue) {
             $this->testData->addResult(sprintf('%s:  %s', $columnName, $sampleValue));
         }

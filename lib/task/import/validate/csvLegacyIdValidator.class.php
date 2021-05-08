@@ -90,7 +90,6 @@ class CsvLegacyIdValidator extends CsvBaseValidator
                 $this->testData->addResult(sprintf("Rows with non-unique 'legacyId' values: %s", count($this->nonUniqueLegacyIdValues)));
                 $this->testData->addDetail(sprintf("Non-unique 'legacyId' values: %s", implode(', ', $this->nonUniqueLegacyIdValues)));
             } else {
-                $this->testData->setStatusInfo();
                 $this->testData->addResult(sprintf("'legacyId' values are all unique."));
             }
 

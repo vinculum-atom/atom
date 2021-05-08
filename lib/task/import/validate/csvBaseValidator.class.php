@@ -47,7 +47,7 @@ abstract class CsvBaseValidator
             $this->setOptions($options);
         }
 
-        $this->testData = new CsvValidatorResult($this->title, $this->filename, $this->getClassName(), $this->options['verbose']);
+        $this->testData = new CsvValidatorResult($this->title, $this->filename, $this->getClassName(), $this->getVerbose());
     }
 
     public function testRow(array $header, array $row)
@@ -57,7 +57,13 @@ abstract class CsvBaseValidator
 
     public function reset()
     {
-        $this->testData = new CsvValidatorResult($this->title, $this->filename, $this->getClassName(), $this->options['verbose']);
+        $this->filename = '';
+        $this->testData = new CsvValidatorResult($this->title, $this->filename, $this->getClassName(), $this->getVerbose());
+    }
+
+    public function getVerbose()
+    {
+        return (isset($this->options['verbose']) && $this->options['verbose']) ? true : false;
     }
 
     public function setOrmClasses(array $classes)

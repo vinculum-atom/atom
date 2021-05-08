@@ -69,11 +69,6 @@ class CsvColumnCountTest extends \PHPUnit\Framework\TestCase
         ];
 
         $this->vfs = vfsStream::setup('root', null, $directory);
-
-        $this->ormClasses = [
-            'QubitFlatfileImport' => \AccessToMemory\test\mock\QubitFlatfileImport::class,
-            'QubitObject' => \AccessToMemory\test\mock\QubitObject::class,
-        ];
     }
 
     /**
@@ -278,7 +273,6 @@ class CsvColumnCountTest extends \PHPUnit\Framework\TestCase
         $csvValidator->setCsvTests($tests);
         $csvValidator->setFilenames(explode(',', $filenames));
         $csvValidator->setVerbose($verbose);
-        $csvValidator->setOrmClasses($this->ormClasses);
 
         return $csvValidator->validate();
     }

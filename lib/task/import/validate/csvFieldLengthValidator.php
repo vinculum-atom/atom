@@ -107,8 +107,6 @@ class CsvFieldLengthValidator extends CsvBaseValidator
 
     public function getTestResult()
     {
-        $this->testData->setStatusInfo();
-
         if (empty($this->columnsFound)) {
             $this->testData->addResult('No columns to check.');
         } else {

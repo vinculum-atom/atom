@@ -53,7 +53,7 @@ class csvCheckImportTask extends arBaseTask
         $results = $validator->validate();
 
         $output = CsvValidatorResultCollection::renderResultsAsText($results, $this->verbose);
-        echo($output);
+        echo $output;
 
         unset($validator);
     }
@@ -96,16 +96,6 @@ class csvCheckImportTask extends arBaseTask
                 sfCommandOption::PARAMETER_REQUIRED,
                 'Path to root of digital object folder that will match digitalObjectPath in CSV.'
             ),
-            new sfCommandOption('separator', null,
-                sfCommandOption::PARAMETER_REQUIRED,
-                'Optional separator parameter sets CSV field separator (1 character).',
-                ','
-            ),
-            new sfCommandOption('enclosure', null,
-                sfCommandOption::PARAMETER_REQUIRED,
-                'Optional enclosure parameter sets CSV field enclosure character (1 character).',
-                '"'
-            ),
         ]);
 
         $this->namespace = 'csv';
@@ -145,8 +135,6 @@ EOF;
             'verbose' => 'verbose',
             'source' => 'source',
             'class-name' => 'className',
-            'separator' => 'separator',
-            'enclosure' => 'enclosure',
             'escape' => 'escape',
             'specific-tests' => 'specificTests',
             'path-to-digital-objects' => 'pathToDigitalObjects',

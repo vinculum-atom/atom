@@ -4,7 +4,7 @@
  * @internal
  * @covers \CsvImportValidator
  */
-class CsvImportValidatorTest extends \PHPUnit\Framework\TestCase
+class CsvValidatorTest extends \PHPUnit\Framework\TestCase
 {
     protected $vdbcon;
     protected $context;
@@ -12,15 +12,9 @@ class CsvImportValidatorTest extends \PHPUnit\Framework\TestCase
     public function setUp(): void
     {
         $this->context = sfContext::getInstance();
-
-        $this->ormClasses = [
-            'QubitFlatfileImport' => \AccessToMemory\test\mock\QubitFlatfileImport::class,
-            'QubitObject' => \AccessToMemory\test\mock\QubitObject::class,
-        ];
     }
 
     // Basic tests
-
     public function testConstructorWithNoContextPassed()
     {
         $csvValidator = new CsvImportValidator(null, $this->vdbcon, null);

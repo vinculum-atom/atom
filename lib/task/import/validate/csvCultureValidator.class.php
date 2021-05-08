@@ -94,8 +94,6 @@ class CsvCultureValidator extends CsvBaseValidator
 
     public function getTestResult()
     {
-        $this->testData->setStatusInfo();
-
         if (false == $this->cultureColumnPresent) {
             // culture column not present in file.
             $this->testData->setStatusWarn();

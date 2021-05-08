@@ -63,7 +63,6 @@ class CsvColumnCountValidator extends CsvBaseValidator
     {
         // When rows are all same length then rowCountSummary will have 1 row.
         if (1 == count($this->rowCountSummary)) {
-            $this->testData->setStatusInfo();
             $this->testData->addResult(sprintf('Number of columns in CSV: %s', $this->headerCount));
 
             // Set a warning if there's less than 2 columns. This is probably an issue with field separators.

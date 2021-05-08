@@ -65,13 +65,6 @@ class CsvValidatorResult
         }
     }
 
-    public function setStatusInfo()
-    {
-        if ($this->testData[self::TEST_STATUS] < self::RESULT_INFO) {
-            $this->testData[self::TEST_STATUS] = self::RESULT_INFO;
-        }
-    }
-
     public function setStatusWarn()
     {
         if ($this->testData[self::TEST_STATUS] < self::RESULT_WARN) {
@@ -131,6 +124,21 @@ class CsvValidatorResult
         return $this->classname;
     }
 
+    public function setClassname(string $classname)
+    {
+        $this->classname = $classname;
+    }
+
+    public function getVerbosity(): bool
+    {
+        return $this->verbose;
+    }
+
+    public function setVerbosity(bool $verbose)
+    {
+        $this->verbose = $verbose;
+    }
+
     public function toArray()
     {
         return $this->testData;
@@ -143,10 +151,10 @@ class CsvValidatorResult
                 return 'info';
 
             case self::RESULT_WARN:
-                return 'Warning';
+                return 'warning';
 
             case self::RESULT_ERROR:
-                return 'ERROR';
+                return 'error';
         }
     }
 }

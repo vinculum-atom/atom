@@ -87,11 +87,8 @@ class CsvLanguageValidator extends CsvBaseValidator
 
     public function getTestResult()
     {
-        $this->testData->setStatusInfo();
-
         if (false == $this->languageColumnPresent) {
             // language column not present in file.
-            $this->testData->setStatusInfo();
             $this->testData->addResult(sprintf("'language' column not present in file."));
         } else {
             // Rows exist with invalid language.

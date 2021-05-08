@@ -71,7 +71,6 @@ class CsvDuplicateColumnNameValidator extends CsvBaseValidator
         }
         // No duplicate header values when array_unique has only one element, and last element's value === 1.
         if (1 === count(array_unique($this->columnFrequency)) && 1 === end($this->columnFrequency)) {
-            $this->testData->setStatusInfo();
             $this->testData->addResult('No duplicate column names found.');
         }
 

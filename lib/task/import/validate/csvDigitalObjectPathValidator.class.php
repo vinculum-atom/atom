@@ -89,15 +89,12 @@ class CsvDigitalObjectPathValidator extends CsvBaseValidator
     public function getTestResult()
     {
         if (false === $this->digitalObjectPathColumnPresent) {
-            $this->testData->setStatusInfo();
             $this->testData->addResult(sprintf("Column 'digitalObjectPath' not present in CSV. Nothing to verify."));
         } else {
             $this->testData->addResult(sprintf("Column 'digitalObjectPath' found."));
 
             // Digital object folder option not passed/is invalid.
             if (empty($this->pathToDigitalObjects)) {
-                $this->testData->setStatusInfo();
-
                 // Option was not supplied.
                 if (empty($this->options['pathToDigitalObjects'])) {
                     $this->testData->addResult(sprintf('Digital object folder location not specified.'));
@@ -113,7 +110,6 @@ class CsvDigitalObjectPathValidator extends CsvBaseValidator
                 }
             } else {
                 if (empty($this->digitalObjectUses)) {
-                    $this->testData->setStatusInfo();
                     $this->testData->addResult(sprintf("Column 'digitalObjectPath' is empty."));
                 } else {
                     // Check for Paths that will be overridden by URI.

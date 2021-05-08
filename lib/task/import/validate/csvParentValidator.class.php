@@ -129,8 +129,6 @@ class CsvParentValidator extends CsvBaseValidator
             $this->testData->setStatusWarn();
             $this->testData->addResult(sprintf("'parentId' and 'qubitParentSlugColumnPresent' columns not present. CSV contents will be imported as top level records."));
         } else {
-            $this->testData->setStatusInfo();
-
             if ($this->parentIdColumnPresent) {
                 $this->testData->addResult(sprintf('Rows with parentId populated: %s', $this->rowsWithParentId));
             }

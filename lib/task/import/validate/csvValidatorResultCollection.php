@@ -152,7 +152,7 @@ class CsvValidatorResultCollection
         return $outputString;
     }
 
-    protected function compare($a, $b)
+    protected function compare(CsvValidatorResult $a, CsvValidatorResult $b)
     {
         if ($a->getFilename() == $b->getFilename()) {
             if ($a->getStatus() == $b->getStatus()) {
