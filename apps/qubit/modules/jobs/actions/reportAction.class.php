@@ -33,6 +33,16 @@ class JobsReportAction extends DefaultBrowseAction
 
         $this->job = QubitJob::getById($request->id);
 
+        // Fetch error notes
+        $criteria = new Criteria();
+        $criteria->add(QubitNote::OBJECT_ID, $request->id);
+
+        $this->errorOutput = '';
+        foreach (QubitNote::get($criteria) as $note) {
+            $this->errorOutput .= $note->getContent()."\n";
+        }
+        $this->errorOutput = trim($this->errorOutput);
+
         if (!$this->job) {
             $this->forward404();
         }
