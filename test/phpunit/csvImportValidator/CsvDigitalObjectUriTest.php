@@ -79,7 +79,7 @@ class CsvDigitalObjectUriTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($options[CsvValidatorResult::TEST_TITLE], $result[CsvValidatorResult::TEST_TITLE]);
         $this->assertSame($options[CsvValidatorResult::TEST_STATUS], $result[CsvValidatorResult::TEST_STATUS]);
         $this->assertSame($options[CsvValidatorResult::TEST_RESULTS], $result[CsvValidatorResult::TEST_RESULTS]);
-        $this->assertSame($options[CsvValidatorResult::TEST_DETAIL], $result[CsvValidatorResult::TEST_DETAIL]);
+        $this->assertSame($options[CsvValidatorResult::TEST_DETAILS], $result[CsvValidatorResult::TEST_DETAILS]);
     }
 
     public function csvValidatorTestProvider()
@@ -114,7 +114,7 @@ class CsvDigitalObjectUriTest extends \PHPUnit\Framework\TestCase
                     CsvValidatorResult::TEST_RESULTS => [
                         "Column 'digitalObjectUri' not present in CSV. Nothing to verify.",
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [
+                    CsvValidatorResult::TEST_DETAILS => [
                     ],
                 ],
             ],
@@ -133,7 +133,7 @@ class CsvDigitalObjectUriTest extends \PHPUnit\Framework\TestCase
                         "Column 'digitalObjectUri' found.",
                         "Column 'digitalObjectUri' is empty.",
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [
+                    CsvValidatorResult::TEST_DETAILS => [
                     ],
                 ],
             ],
@@ -156,7 +156,7 @@ class CsvDigitalObjectUriTest extends \PHPUnit\Framework\TestCase
                         'Repeating Digital object URIs found in CSV.',
                         'Invalid digitalObjectUri values detected: 2',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [
+                    CsvValidatorResult::TEST_DETAILS => [
                         "Number of duplicates for URI 'https://www.artefactual.com/wp-content/uploads/2018/08/artefactual-logo-white.svg': 2",
                         'Invalid URI: www.google.com',
                         'Invalid URI: ftp://www.artefactual.com/wp-content/uploads/2018/08/artefactual-logo-white.svg',

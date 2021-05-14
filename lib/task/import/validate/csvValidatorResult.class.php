@@ -32,7 +32,7 @@ class CsvValidatorResult
     const TEST_TITLE = 'title';
     const TEST_STATUS = 'status';
     const TEST_RESULTS = 'results';
-    const TEST_DETAIL = 'details';
+    const TEST_DETAILS = 'details';
 
     protected $testData = [];
     protected $filename;
@@ -48,7 +48,7 @@ class CsvValidatorResult
             self::TEST_TITLE => $title,
             self::TEST_STATUS => self::RESULT_INFO,
             self::TEST_RESULTS => [],
-            self::TEST_DETAIL => [],
+            self::TEST_DETAILS => [],
         ];
     }
 
@@ -59,8 +59,10 @@ class CsvValidatorResult
 
     public function setStatus(int $status)
     {
-        if (in_array($status, [self::RESULT_INFO, self::RESULT_WARN, self::RESULT_ERROR])
-            && ($status > $this->testData[self::TEST_STATUS])) {
+        if (
+            in_array($status, [self::RESULT_INFO, self::RESULT_WARN, self::RESULT_ERROR])
+            && ($status > $this->testData[self::TEST_STATUS])
+        ) {
             $this->testData[self::TEST_STATUS] = intval($status);
         }
     }
@@ -81,7 +83,7 @@ class CsvValidatorResult
 
     public function addDetail(string $value)
     {
-        $this->testData[self::TEST_DETAIL][] = $value;
+        $this->testData[self::TEST_DETAILS][] = $value;
     }
 
     public function addResult(string $value)
@@ -101,7 +103,7 @@ class CsvValidatorResult
 
     public function getDetails(): array
     {
-        return $this->testData[self::TEST_DETAIL];
+        return $this->testData[self::TEST_DETAILS];
     }
 
     public function getResults(): array

@@ -58,7 +58,7 @@ class CsvDuplicateColumnNameTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($options[CsvValidatorResult::TEST_TITLE], $result[CsvValidatorResult::TEST_TITLE]);
         $this->assertSame($options[CsvValidatorResult::TEST_STATUS], $result[CsvValidatorResult::TEST_STATUS]);
         $this->assertSame($options[CsvValidatorResult::TEST_RESULTS], $result[CsvValidatorResult::TEST_RESULTS]);
-        $this->assertSame($options[CsvValidatorResult::TEST_DETAIL], $result[CsvValidatorResult::TEST_DETAIL]);
+        $this->assertSame($options[CsvValidatorResult::TEST_DETAILS], $result[CsvValidatorResult::TEST_DETAILS]);
     }
 
     public function csvValidatorTestProvider()
@@ -87,7 +87,7 @@ class CsvDuplicateColumnNameTest extends \PHPUnit\Framework\TestCase
                     CsvValidatorResult::TEST_RESULTS => [
                         'No duplicate column names found.',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [
+                    CsvValidatorResult::TEST_DETAILS => [
                     ],
                 ],
             ],
@@ -105,7 +105,7 @@ class CsvDuplicateColumnNameTest extends \PHPUnit\Framework\TestCase
                     CsvValidatorResult::TEST_RESULTS => [
                         'Columns with name \'repository\': 2',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [
+                    CsvValidatorResult::TEST_DETAILS => [
                     ],
                 ],
             ],
@@ -124,7 +124,7 @@ class CsvDuplicateColumnNameTest extends \PHPUnit\Framework\TestCase
                         'Columns with name \'culture\': 3',
                         'Columns with name \'repository\': 2',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [
+                    CsvValidatorResult::TEST_DETAILS => [
                     ],
                 ],
             ],

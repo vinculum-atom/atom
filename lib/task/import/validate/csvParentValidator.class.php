@@ -22,16 +22,13 @@
  * Output error status and any rows where parentId is not found.
  *
  * @author     Steve Breker <sbreker@artefactual.com>
- *
- * @internal
- * @coversNothing
  */
 class CsvParentValidator extends CsvBaseValidator
 {
     const TITLE = 'Parent check';
+
     // Persist across multiple CSVs.
     protected $legacyIdList = [];
-
     // Reset after every CSV.
     protected $orphanRowsFound = false;
     protected $parentIdColumnPresent;
@@ -108,13 +105,21 @@ class CsvParentValidator extends CsvBaseValidator
             }
         }
 
-        if ($this->parentIdColumnPresent && empty($row['parentId'])
-            && $this->qubitParentSlugColumnPresent && empty($row['qubitParentSlug'])) {
+        if (
+            $this->parentIdColumnPresent
+            && empty($row['parentId'])
+            && $this->qubitParentSlugColumnPresent
+            && empty($row['qubitParentSlug'])
+        ) {
             ++$this->rowsWithoutParentIdQubitParentSlug;
         }
 
-        if ($this->parentIdColumnPresent && !empty($row['parentId'])
-            && $this->qubitParentSlugColumnPresent && !empty($row['qubitParentSlug'])) {
+        if (
+            $this->parentIdColumnPresent
+            && !empty($row['parentId'])
+            && $this->qubitParentSlugColumnPresent
+            && !empty($row['qubitParentSlug'])
+        ) {
             ++$this->rowsWithParentIdQubitParentSlug;
         }
 
@@ -125,13 +130,14 @@ class CsvParentValidator extends CsvBaseValidator
 
     public function getTestResult()
     {
-        if (false == $this->parentIdColumnPresent && false == $this->qubitParentSlugColumnPresent) {
+        if (!$this->parentIdColumnPresent && !$this->qubitParentSlugColumnPresent) {
             $this->testData->setStatusWarn();
             $this->testData->addResult(sprintf("'parentId' and 'qubitParentSlugColumnPresent' columns not present. CSV contents will be imported as top level records."));
         } else {
             if ($this->parentIdColumnPresent) {
                 $this->testData->addResult(sprintf('Rows with parentId populated: %s', $this->rowsWithParentId));
             }
+
             if ($this->qubitParentSlugColumnPresent) {
                 $this->testData->addResult(sprintf('Rows with qubitParentSlug populated: %s', $this->rowsWithQubitParentSlug));
             }
@@ -144,13 +150,17 @@ class CsvParentValidator extends CsvBaseValidator
             }
 
             // If parentId is present, then it would be an error if legacyId was not present.
-            if (false == $this->legacyIdColumnPresent && 0 < $this->rowsWithParentId) {
+            if (!$this->legacyIdColumnPresent && 0 < $this->rowsWithParentId) {
                 $this->testData->setStatusError();
                 $this->testData->addResult(sprintf("'legacyId' column not found. Unable to match parentId to CSV rows."));
             }
 
             // If unable to find a parentId in the DB, and source was not specified, display a message as this is a possible cause.
-            if (empty($this->options['source']) && $this->parentIdColumnPresent && $this->orphanRowsFound) {
+            if (
+                empty($this->options['source'])
+                && $this->parentIdColumnPresent
+                && $this->orphanRowsFound
+            ) {
                 $this->testData->setStatusWarn();
                 $this->testData->addResult(sprintf("'source' option not specified. Unable to check parentId values against AtoM's database."));
             }
@@ -164,8 +174,6 @@ class CsvParentValidator extends CsvBaseValidator
         return parent::getTestResult();
     }
 
-    // TODO: Remove this DB access to a wrapper class so it's not performed in the
-    // test class itself.
     protected function canFindBySlug(string $parentSlug, string $className)
     {
         if ('' === trim($parentSlug)) {
@@ -175,15 +183,13 @@ class CsvParentValidator extends CsvBaseValidator
         // Check DB for slug.
         $object = $this->ormClasses['QubitObject']::getBySlug($parentSlug);
 
-        if (isset($object) && $object->className == $className) {
+        if (isset($object) && $object->className === $className) {
             return true;
         }
 
         return false;
     }
 
-    // TODO: Remove these DB accesses to a wrapper class so it's not performed in the
-    // test class itself.
     // Check legacyId history from this set of import files. If not found, check keymap table.
     protected function canFindByParentId(string $parentId, string $source = '', string $objectType = 'information_object')
     {
@@ -197,7 +203,11 @@ class CsvParentValidator extends CsvBaseValidator
         }
 
         // If not found, check keymap table in database.
-        if (!empty($parentId) && !empty($source) && !empty($objectType)) {
+        if (
+            !empty($parentId)
+            && !empty($source)
+            && !empty($objectType)
+        ) {
             $mapEntry = $this->ormClasses['QubitFlatfileImport']::fetchKeymapEntryBySourceAndTargetName(
                 $parentId,
                 $source,

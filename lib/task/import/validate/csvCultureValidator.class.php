@@ -22,13 +22,11 @@
  * and check if piped value.
  *
  * @author     Steve Breker <sbreker@artefactual.com>
- *
- * @internal
- * @coversNothing
  */
 class CsvCultureValidator extends CsvBaseValidator
 {
     const TITLE = 'Culture Check';
+
     protected $cultureColumnPresent;
     protected $rowsWithBlankCulture = 0;
     protected $rowsWithPipeFoundInCulture = 0;
@@ -94,7 +92,7 @@ class CsvCultureValidator extends CsvBaseValidator
 
     public function getTestResult()
     {
-        if (false == $this->cultureColumnPresent) {
+        if (!$this->cultureColumnPresent) {
             // culture column not present in file.
             $this->testData->setStatusWarn();
             $this->testData->addResult(sprintf("'culture' column not present in file."));
@@ -119,15 +117,25 @@ class CsvCultureValidator extends CsvBaseValidator
                 $this->testData->addResult(sprintf("'culture' column does not allow for multiple values separated with a pipe '|' character."));
             }
 
-            if (0 < $this->rowsWithInvalidCulture || 0 < $this->rowsWithPipeFoundInCulture) {
+            if (
+                0 < $this->rowsWithInvalidCulture
+                || 0 < $this->rowsWithPipeFoundInCulture
+            ) {
                 $this->testData->addResult(sprintf('Invalid culture values: %s', implode(', ', $this->invalidCultures)));
             }
 
-            if (0 < $this->rowsWithBlankCulture || 0 < $this->rowsWithInvalidCulture) {
+            if (
+                0 < $this->rowsWithBlankCulture
+                || 0 < $this->rowsWithInvalidCulture
+            ) {
                 $this->testData->addResult(sprintf("Rows with a blank culture value will be imported using AtoM's default source culture."));
             }
 
-            if (0 == $this->rowsWithBlankCulture && 0 == $this->rowsWithInvalidCulture && 0 == $this->rowsWithPipeFoundInCulture) {
+            if (
+                0 === $this->rowsWithBlankCulture
+                && 0 === $this->rowsWithInvalidCulture
+                && 0 === $this->rowsWithPipeFoundInCulture
+            ) {
                 $this->testData->addResult(sprintf("'culture' column values are all valid."));
             }
         }

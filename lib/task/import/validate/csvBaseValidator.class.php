@@ -123,6 +123,7 @@ abstract class CsvBaseValidator
         for ($i = count($header); $i < $this->columnCount; ++$i) {
             $header[] = sprintf('%s-%d', self::HEADER_PLACEHOLDER, $i);
         }
+
         // Enforce row has $columnCount elements.
         for ($i = count($row); $i < $this->columnCount; ++$i) {
             $row[] = '';

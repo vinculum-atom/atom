@@ -22,13 +22,11 @@
  * populated row found. Only populated columns are included.
  *
  * @author     Steve Breker <sbreker@artefactual.com>
- *
- * @internal
- * @coversNothing
  */
 class CsvSampleValuesValidator extends CsvBaseValidator
 {
     const TITLE = 'Sample Values';
+
     protected $values = [];
 
     public function __construct(array $options = null)

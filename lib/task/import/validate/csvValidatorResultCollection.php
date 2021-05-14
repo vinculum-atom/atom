@@ -26,10 +26,6 @@ class CsvValidatorResultCollection
 {
     protected $results = [];
 
-    public function __construct()
-    {
-    }
-
     public function appendResult(CsvValidatorResult $result)
     {
         $this->results[] = $result;
@@ -56,7 +52,7 @@ class CsvValidatorResultCollection
     public function getByFilenameTestname(string $filename, string $testname)
     {
         foreach ($this->results as $result) {
-            if ($filename == $result->getFilename() && $testname == $result->getClassname()) {
+            if ($filename === $result->getFilename() && $testname === $result->getClassname()) {
                 return $result->toArray();
             }
         }
@@ -154,8 +150,8 @@ class CsvValidatorResultCollection
 
     protected function compare(CsvValidatorResult $a, CsvValidatorResult $b)
     {
-        if ($a->getFilename() == $b->getFilename()) {
-            if ($a->getStatus() == $b->getStatus()) {
+        if ($a->getFilename() === $b->getFilename()) {
+            if ($a->getStatus() === $b->getStatus()) {
                 return 0;
             }
 

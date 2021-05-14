@@ -71,7 +71,7 @@ class CsvLegacyIdTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($options[CsvValidatorResult::TEST_TITLE], $result[CsvValidatorResult::TEST_TITLE]);
         $this->assertSame($options[CsvValidatorResult::TEST_STATUS], $result[CsvValidatorResult::TEST_STATUS]);
         $this->assertSame($options[CsvValidatorResult::TEST_RESULTS], $result[CsvValidatorResult::TEST_RESULTS]);
-        $this->assertSame($options[CsvValidatorResult::TEST_DETAIL], $result[CsvValidatorResult::TEST_DETAIL]);
+        $this->assertSame($options[CsvValidatorResult::TEST_DETAILS], $result[CsvValidatorResult::TEST_DETAILS]);
     }
 
     public function csvValidatorTestProvider()
@@ -101,7 +101,7 @@ class CsvLegacyIdTest extends \PHPUnit\Framework\TestCase
                     CsvValidatorResult::TEST_RESULTS => [
                         '\'legacyId\' column not present. Future CSV updates may not match these records.',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [
+                    CsvValidatorResult::TEST_DETAILS => [
                     ],
                 ],
             ],
@@ -121,7 +121,7 @@ class CsvLegacyIdTest extends \PHPUnit\Framework\TestCase
                         'Rows with empty \'legacyId\' column: 2',
                         'Future CSV updates may not match these records.',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [
+                    CsvValidatorResult::TEST_DETAILS => [
                         ',,,Chemise,,,,fr',
                         ',DJ003,ID4,Title Four,,,,en',
                     ],
@@ -143,7 +143,7 @@ class CsvLegacyIdTest extends \PHPUnit\Framework\TestCase
                         'Rows with empty \'legacyId\' column: 1',
                         'Future CSV updates may not match these records.',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [
+                    CsvValidatorResult::TEST_DETAILS => [
                         ',,,Chemise,,,,fr',
                         'Non-unique \'legacyId\' values: B10101',
                     ],

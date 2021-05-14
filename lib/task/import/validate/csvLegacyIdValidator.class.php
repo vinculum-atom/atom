@@ -22,16 +22,13 @@
  * Output error status and any rows where legacyId is not found.
  *
  * @author     Steve Breker <sbreker@artefactual.com>
- *
- * @internal
- * @coversNothing
  */
 class CsvLegacyIdValidator extends CsvBaseValidator
 {
     const TITLE = 'LegacyId check';
+
     // Persist across multiple CSVs.
     protected $legacyIdValues = [];
-
     // Reset after every CSV.
     protected $legacyIdColumnPresent;
     protected $rowsWithoutLegacyId = 0;
@@ -80,7 +77,7 @@ class CsvLegacyIdValidator extends CsvBaseValidator
 
     public function getTestResult()
     {
-        if (false == $this->legacyIdColumnPresent) {
+        if (!$this->legacyIdColumnPresent) {
             $this->testData->setStatusWarn();
             $this->testData->addResult(sprintf("'legacyId' column not present. Future CSV updates may not match these records."));
         } else {

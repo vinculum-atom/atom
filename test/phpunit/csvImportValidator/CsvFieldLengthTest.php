@@ -89,7 +89,7 @@ class CsvFieldLengthTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($options[CsvValidatorResult::TEST_TITLE], $result[CsvValidatorResult::TEST_TITLE]);
         $this->assertSame($options[CsvValidatorResult::TEST_STATUS], $result[CsvValidatorResult::TEST_STATUS]);
         $this->assertSame($options[CsvValidatorResult::TEST_RESULTS], $result[CsvValidatorResult::TEST_RESULTS]);
-        $this->assertSame($options[CsvValidatorResult::TEST_DETAIL], $result[CsvValidatorResult::TEST_DETAIL]);
+        $this->assertSame($options[CsvValidatorResult::TEST_DETAILS], $result[CsvValidatorResult::TEST_DETAILS]);
     }
 
     public function csvValidatorTestProvider()
@@ -119,7 +119,7 @@ class CsvFieldLengthTest extends \PHPUnit\Framework\TestCase
                     CsvValidatorResult::TEST_RESULTS => [
                         'No columns to check.',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [
+                    CsvValidatorResult::TEST_DETAILS => [
                     ],
                 ],
             ],
@@ -138,7 +138,7 @@ class CsvFieldLengthTest extends \PHPUnit\Framework\TestCase
                         'Checking columns: culture',
                         '\'culture\' values that exceed 6 characters: 0',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [
+                    CsvValidatorResult::TEST_DETAILS => [
                     ],
                 ],
             ],
@@ -159,7 +159,7 @@ class CsvFieldLengthTest extends \PHPUnit\Framework\TestCase
                         '\'language\' column may have invalid values.',
                         '\'language\' values that exceed 6 characters: 1',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [
+                    CsvValidatorResult::TEST_DETAILS => [
                         'language column value: english',
                     ],
                 ],
@@ -182,7 +182,7 @@ class CsvFieldLengthTest extends \PHPUnit\Framework\TestCase
                         '\'language\' column may have invalid values.',
                         '\'language\' values that exceed 6 characters: 2',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [
+                    CsvValidatorResult::TEST_DETAILS => [
                         'language column value: this is spanish',
                         'culture column value: Germany',
                         'language column value: english',

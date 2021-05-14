@@ -21,15 +21,12 @@
  * CSV language column test. Check if present, check values against master list.
  *
  * @author     Steve Breker <sbreker@artefactual.com>
- *
- * @internal
- * @coversNothing
  */
 class CsvLanguageValidator extends CsvBaseValidator
 {
     const TITLE = 'Language Check';
-    protected $languages = [];
 
+    protected $languages = [];
     protected $languageColumnPresent;
     protected $rowsWithInvalidLanguage = 0;
     protected $invalidLanguages = [];
@@ -87,7 +84,7 @@ class CsvLanguageValidator extends CsvBaseValidator
 
     public function getTestResult()
     {
-        if (false == $this->languageColumnPresent) {
+        if (!$this->languageColumnPresent) {
             // language column not present in file.
             $this->testData->addResult(sprintf("'language' column not present in file."));
         } else {
@@ -101,7 +98,7 @@ class CsvLanguageValidator extends CsvBaseValidator
                 $this->testData->addResult(sprintf('Invalid language values: %s', implode(', ', $this->invalidLanguages)));
             }
 
-            if (0 == $this->rowsWithInvalidLanguage) {
+            if (0 === $this->rowsWithInvalidLanguage) {
                 $this->testData->addResult(sprintf("'language' column values are all valid."));
             }
         }
@@ -109,8 +106,6 @@ class CsvLanguageValidator extends CsvBaseValidator
         return parent::getTestResult();
     }
 
-    // TODO: Remove these DB accesses to a wrapper class so it's not performed in the
-    // test class itself.
     protected function isLanguageValid(string $language)
     {
         if (!empty($language)) {

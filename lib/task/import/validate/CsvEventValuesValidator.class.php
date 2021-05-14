@@ -18,20 +18,18 @@
  */
 
 /**
- * CSV Multi Value test. Test if specified mulitvalue columns are all of the same length.
+ * CSV Multivalue test. Test if specified mulitvalue columns are all of the same length.
  * e.g.: eventType, eventActor, etc...
  *
  * Issue warning if eventTypes has nonzero count of x eventTypes, and any another column
  * has a different number of event values than eventTypes. Do not warn for empty fields.
  *
  * @author     Steve Breker <sbreker@artefactual.com>
- *
- * @internal
- * @coversNothing
  */
 class CsvEventValuesValidator extends CsvBaseValidator
 {
     const TITLE = 'Event Value Count Test';
+
     protected $matchList = [
         'eventTypes',
         'eventDates',
@@ -77,6 +75,7 @@ class CsvEventValuesValidator extends CsvBaseValidator
                     $this->columnsFound[] = $columnName;
                 }
             }
+
             $this->columnsChecked = true;
         }
 

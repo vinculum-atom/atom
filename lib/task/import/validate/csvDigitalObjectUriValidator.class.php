@@ -25,11 +25,6 @@
  *
  * @author     Steve Breker <sbreker@artefactual.com>
  */
-
-/**
- * @internal
- * @coversNothing
- */
 class CsvDigitalObjectUriValidator extends CsvBaseValidator
 {
     const TITLE = 'Digital Object URI Test';
@@ -70,7 +65,7 @@ class CsvDigitalObjectUriValidator extends CsvBaseValidator
 
     public function getTestResult()
     {
-        if (false == $this->digitalObjectUriColumnPresent) {
+        if (false === $this->digitalObjectUriColumnPresent) {
             $this->testData->addResult(sprintf("Column 'digitalObjectUri' not present in CSV. Nothing to verify."));
         } else {
             $this->testData->addResult(sprintf("Column 'digitalObjectUri' found."));
@@ -133,7 +128,7 @@ class CsvDigitalObjectUriValidator extends CsvBaseValidator
             } else {
                 $parsedUri = parse_url($uri);
 
-                if (!('https' == $parsedUri['scheme'] || 'http' == $parsedUri['scheme'])) {
+                if (!('https' === $parsedUri['scheme'] || 'http' === $parsedUri['scheme'])) {
                     array_push($invalidUris, $uri);
                 }
             }

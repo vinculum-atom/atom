@@ -21,13 +21,11 @@
  * CSV column count test. Test all rows in CSV have the same number of columns.
  *
  * @author     Steve Breker <sbreker@artefactual.com>
- *
- * @internal
- * @coversNothing
  */
 class CsvColumnCountValidator extends CsvBaseValidator
 {
     const TITLE = 'CSV Column Count Check';
+
     protected $headerCount;
     protected $rowCountSummary = [];
 
@@ -62,7 +60,7 @@ class CsvColumnCountValidator extends CsvBaseValidator
     public function getTestResult()
     {
         // When rows are all same length then rowCountSummary will have 1 row.
-        if (1 == count($this->rowCountSummary)) {
+        if (1 === count($this->rowCountSummary)) {
             $this->testData->addResult(sprintf('Number of columns in CSV: %s', $this->headerCount));
 
             // Set a warning if there's less than 2 columns. This is probably an issue with field separators.

@@ -21,13 +21,11 @@
  * CSV Duplicate column name test. Throw error if any column names are repeated in the file.
  *
  * @author     Steve Breker <sbreker@artefactual.com>
- *
- * @internal
- * @coversNothing
  */
 class CsvDuplicateColumnNameValidator extends CsvBaseValidator
 {
     const TITLE = 'Duplicate Column Name Check';
+
     protected $columnFrequency = [];
 
     public function __construct(array $options = null)

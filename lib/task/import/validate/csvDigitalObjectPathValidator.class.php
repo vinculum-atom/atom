@@ -24,9 +24,6 @@
  *  - images referenced more that once in the CSV.
  *
  * @author     Steve Breker <sbreker@artefactual.com>
- *
- * @internal
- * @coversNothing
  */
 class CsvDigitalObjectPathValidator extends CsvBaseValidator
 {
@@ -35,7 +32,7 @@ class CsvDigitalObjectPathValidator extends CsvBaseValidator
     // Do not reset between CSVs.
     protected $fileList = [];
     protected $pathToDigitalObjects = '';
-
+    // Reset between files.
     protected $digitalObjectPathColumnPresent;
     protected $digitalObjectUriColumnPresent;
     protected $digitalObjectUses = [];
@@ -103,6 +100,7 @@ class CsvDigitalObjectPathValidator extends CsvBaseValidator
                 else {
                     $this->testData->addResult(sprintf('Unable to open digital object folder path: %s', $this->options['pathToDigitalObjects']));
                 }
+
                 // If digitalObjectPath column is populated in CSV, this is an error.
                 if (0 < count($this->digitalObjectUses)) {
                     $this->testData->setStatusError();

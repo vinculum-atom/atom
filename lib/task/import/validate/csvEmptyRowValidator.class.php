@@ -23,13 +23,11 @@
  *  -  have CSV fields but all are entirely empty.
  *
  * @author     Steve Breker <sbreker@artefactual.com>
- *
- * @internal
- * @coversNothing
  */
 class CsvEmptyRowValidator extends CsvBaseValidator
 {
     const TITLE = 'CSV Empty Row Check';
+
     protected $headerIsBlank;
     protected $blankRowSummary = [];
 
@@ -54,11 +52,11 @@ class CsvEmptyRowValidator extends CsvBaseValidator
 
         // Test if header is blank
         if (!isset($this->headerIsBlank)) {
-            $this->headerIsBlank = 0 == strlen(trim(implode($header)));
+            $this->headerIsBlank = 0 === strlen(trim(implode($header)));
         }
 
         // Test if row is blank. Record line numbers of blank rows.
-        if (0 == strlen(trim(implode($row)))) {
+        if (0 === strlen(trim(implode($row)))) {
             $this->blankRowSummary[] = $this->rowNumber;
         }
     }

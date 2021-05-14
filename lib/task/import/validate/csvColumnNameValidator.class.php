@@ -23,17 +23,15 @@
  * Validate against files in 'lib/flatfile/config'.
  *
  * @author     Steve Breker <sbreker@artefactual.com>
- *
- * @internal
- * @coversNothing
  */
 class CsvColumnNameValidator extends CsvBaseValidator
 {
     const TITLE = 'Column Name Validation';
+
     // Do not reset in between multiple CSVs.
     protected $validColumnNames = [];
     protected $validColumnNamesLowercase = [];
-
+    // Reset between files.
     protected $unknownColumnNames = [];
     protected $caseIssuesColumnNameMap = [];
     protected $trimIssuesColumnNames = [];

@@ -46,7 +46,8 @@ class csvCheckImportTask extends arBaseTask
         $filenames = $this->setCsvValidatorFilenames($arguments['filename']);
 
         $validator = new CsvImportValidator(
-            $this->context, $this->getDbConnection(), $validatorOptions);
+            $this->context, $this->getDbConnection(), $validatorOptions
+        );
 
         $validator->setShowDisplayProgress(true);
         $validator->setFilenames($filenames);
@@ -127,8 +128,6 @@ EOF;
 
     protected function setOptions($options = [])
     {
-        $this->validateOptions($options);
-
         $opts = [];
 
         $keymap = [
@@ -149,12 +148,5 @@ EOF;
         }
 
         return $opts;
-    }
-
-    protected function validateOptions($options = [])
-    {
-        // Throw exception here if set option is invalid.
-
-        // TODO: Add validation of class-name
     }
 }

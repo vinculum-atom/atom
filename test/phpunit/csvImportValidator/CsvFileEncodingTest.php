@@ -67,7 +67,7 @@ class CsvFileEncodingTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($options[CsvValidatorResult::TEST_TITLE], $result[CsvValidatorResult::TEST_TITLE]);
         $this->assertSame($options[CsvValidatorResult::TEST_STATUS], $result[CsvValidatorResult::TEST_STATUS]);
         $this->assertSame($options[CsvValidatorResult::TEST_RESULTS], $result[CsvValidatorResult::TEST_RESULTS]);
-        $this->assertSame($options[CsvValidatorResult::TEST_DETAIL], $result[CsvValidatorResult::TEST_DETAIL]);
+        $this->assertSame($options[CsvValidatorResult::TEST_DETAILS], $result[CsvValidatorResult::TEST_DETAILS]);
     }
 
     public function csvValidatorTestProvider()
@@ -89,7 +89,7 @@ class CsvFileEncodingTest extends \PHPUnit\Framework\TestCase
                         'File encoding is UTF-8 compatible.',
                         'This file includes a UTF-8 BOM.',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [],
+                    CsvValidatorResult::TEST_DETAILS => [],
                 ],
             ],
 
@@ -106,7 +106,7 @@ class CsvFileEncodingTest extends \PHPUnit\Framework\TestCase
                     CsvValidatorResult::TEST_RESULTS => [
                         'File encoding is UTF-8 compatible.',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [],
+                    CsvValidatorResult::TEST_DETAILS => [],
                 ],
             ],
 
@@ -124,7 +124,7 @@ class CsvFileEncodingTest extends \PHPUnit\Framework\TestCase
                         'File encoding is UTF-8 compatible.',
                         'This file includes a UTF-8 BOM.',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [],
+                    CsvValidatorResult::TEST_DETAILS => [],
                 ],
             ],
 
@@ -141,7 +141,7 @@ class CsvFileEncodingTest extends \PHPUnit\Framework\TestCase
                     CsvValidatorResult::TEST_RESULTS => [
                         'File encoding is UTF-8 compatible.',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [],
+                    CsvValidatorResult::TEST_DETAILS => [],
                 ],
             ],
 
@@ -158,7 +158,7 @@ class CsvFileEncodingTest extends \PHPUnit\Framework\TestCase
                     CsvValidatorResult::TEST_RESULTS => [
                         'File encoding does not appear to be UTF-8 compatible.',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [implode(',', str_getcsv(mb_convert_encoding('"D20202", "DJ002", "", "Voûte, étagère 0074", "", "", "", ""', 'Windows-1252', 'UTF-8')))],
+                    CsvValidatorResult::TEST_DETAILS => [implode(',', str_getcsv(mb_convert_encoding('"D20202", "DJ002", "", "Voûte, étagère 0074", "", "", "", ""', 'Windows-1252', 'UTF-8')))],
                 ],
             ],
 
@@ -175,7 +175,7 @@ class CsvFileEncodingTest extends \PHPUnit\Framework\TestCase
                     CsvValidatorResult::TEST_RESULTS => [
                         'File encoding does not appear to be UTF-8 compatible.',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [implode(',', str_getcsv(mb_convert_encoding('"D20202", "DJ002", "", "Voûte, étagère 0074", "", "", "", ""', 'Windows-1252', 'UTF-8')))],
+                    CsvValidatorResult::TEST_DETAILS => [implode(',', str_getcsv(mb_convert_encoding('"D20202", "DJ002", "", "Voûte, étagère 0074", "", "", "", ""', 'Windows-1252', 'UTF-8')))],
                 ],
             ],
 
@@ -193,7 +193,7 @@ class CsvFileEncodingTest extends \PHPUnit\Framework\TestCase
                         'File encoding is UTF-8 compatible.',
                         'This file includes a unicode BOM, but it is not UTF-8.',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [],
+                    CsvValidatorResult::TEST_DETAILS => [],
                 ],
             ],
 
@@ -211,7 +211,7 @@ class CsvFileEncodingTest extends \PHPUnit\Framework\TestCase
                         'File encoding is UTF-8 compatible.',
                         'This file includes a unicode BOM, but it is not UTF-8.',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [],
+                    CsvValidatorResult::TEST_DETAILS => [],
                 ],
             ],
 
@@ -229,7 +229,7 @@ class CsvFileEncodingTest extends \PHPUnit\Framework\TestCase
                         'File encoding is UTF-8 compatible.',
                         'This file includes a unicode BOM, but it is not UTF-8.',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [],
+                    CsvValidatorResult::TEST_DETAILS => [],
                 ],
             ],
 
@@ -247,7 +247,7 @@ class CsvFileEncodingTest extends \PHPUnit\Framework\TestCase
                         'File encoding is UTF-8 compatible.',
                         'This file includes a unicode BOM, but it is not UTF-8.',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [],
+                    CsvValidatorResult::TEST_DETAILS => [],
                 ],
             ],
         ];

@@ -77,7 +77,7 @@ class CsvEmptyRowTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($options[CsvValidatorResult::TEST_TITLE], $result[CsvValidatorResult::TEST_TITLE]);
         $this->assertSame($options[CsvValidatorResult::TEST_STATUS], $result[CsvValidatorResult::TEST_STATUS]);
         $this->assertSame($options[CsvValidatorResult::TEST_RESULTS], $result[CsvValidatorResult::TEST_RESULTS]);
-        $this->assertSame($options[CsvValidatorResult::TEST_DETAIL], $result[CsvValidatorResult::TEST_DETAIL]);
+        $this->assertSame($options[CsvValidatorResult::TEST_DETAILS], $result[CsvValidatorResult::TEST_DETAILS]);
     }
 
     public function csvValidatorTestProvider()
@@ -98,7 +98,7 @@ class CsvEmptyRowTest extends \PHPUnit\Framework\TestCase
                     CsvValidatorResult::TEST_RESULTS => [
                         'CSV does not have any blank rows.',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [],
+                    CsvValidatorResult::TEST_DETAILS => [],
                 ],
             ],
 
@@ -115,7 +115,7 @@ class CsvEmptyRowTest extends \PHPUnit\Framework\TestCase
                     CsvValidatorResult::TEST_RESULTS => [
                         'CSV blank row count: 2',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [
+                    CsvValidatorResult::TEST_DETAILS => [
                         'Blank row numbers: 3, 6',
                     ],
                 ],
@@ -134,7 +134,7 @@ class CsvEmptyRowTest extends \PHPUnit\Framework\TestCase
                     CsvValidatorResult::TEST_RESULTS => [
                         'CSV blank row count: 2',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [
+                    CsvValidatorResult::TEST_DETAILS => [
                         'Blank row numbers: 3, 5',
                     ],
                 ],
@@ -154,7 +154,7 @@ class CsvEmptyRowTest extends \PHPUnit\Framework\TestCase
                         'CSV Header is blank.',
                         'CSV blank row count: 2',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [
+                    CsvValidatorResult::TEST_DETAILS => [
                         'Blank row numbers: 3, 6',
                     ],
                 ],
@@ -174,7 +174,7 @@ class CsvEmptyRowTest extends \PHPUnit\Framework\TestCase
                         'CSV Header is blank.',
                         'CSV blank row count: 2',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [
+                    CsvValidatorResult::TEST_DETAILS => [
                         'Blank row numbers: 3, 5',
                     ],
                 ],

@@ -22,13 +22,11 @@
  * Allow to trigger either warning or error by column type.
  *
  * @author     Steve Breker <sbreker@artefactual.com>
- *
- * @internal
- * @coversNothing
  */
 class CsvFieldLengthValidator extends CsvBaseValidator
 {
     const TITLE = 'Field Length Check';
+
     // Add fields to check legth of here with max len. Anything larger than this value will
     // trigger the default action.
     protected $fieldMaxSizes = [
@@ -118,6 +116,7 @@ class CsvFieldLengthValidator extends CsvBaseValidator
                 $this->testData->setStatusWarn();
                 $this->testData->addResult(sprintf("'%s' column may have invalid values.", $columnName));
             }
+
             $this->testData->addResult(sprintf("'%s' values that exceed %s characters: %s", $columnName, $this->fieldMaxSizes[$columnName], $errorCount));
         }
 

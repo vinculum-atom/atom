@@ -21,13 +21,11 @@
  * CSV UTF8 encoding validation.
  *
  * @author     Steve Breker <sbreker@artefactual.com>
- *
- * @internal
- * @coversNothing
  */
 class CsvFileEncodingValidator extends CsvBaseValidator
 {
     const TITLE = 'UTF-8 File Encoding Check';
+
     protected $utf8BomPresent;
     protected $utf8Compatible = true;
 

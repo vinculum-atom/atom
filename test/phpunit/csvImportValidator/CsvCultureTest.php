@@ -80,7 +80,7 @@ class CsvCultureTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($options[CsvValidatorResult::TEST_TITLE], $result[CsvValidatorResult::TEST_TITLE]);
         $this->assertSame($options[CsvValidatorResult::TEST_STATUS], $result[CsvValidatorResult::TEST_STATUS]);
         $this->assertSame($options[CsvValidatorResult::TEST_RESULTS], $result[CsvValidatorResult::TEST_RESULTS]);
-        $this->assertSame($options[CsvValidatorResult::TEST_DETAIL], $result[CsvValidatorResult::TEST_DETAIL]);
+        $this->assertSame($options[CsvValidatorResult::TEST_DETAILS], $result[CsvValidatorResult::TEST_DETAILS]);
     }
 
     public function csvValidatorTestProvider()
@@ -110,7 +110,7 @@ class CsvCultureTest extends \PHPUnit\Framework\TestCase
                         '\'culture\' column not present in file.',
                         'Rows without a valid culture value will be imported using AtoM\'s default source culture.',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [
+                    CsvValidatorResult::TEST_DETAILS => [
                     ],
                 ],
             ],
@@ -128,7 +128,7 @@ class CsvCultureTest extends \PHPUnit\Framework\TestCase
                     CsvValidatorResult::TEST_RESULTS => [
                         '\'culture\' column values are all valid.',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [
+                    CsvValidatorResult::TEST_DETAILS => [
                     ],
                 ],
             ],
@@ -151,7 +151,7 @@ class CsvCultureTest extends \PHPUnit\Framework\TestCase
                         'Invalid culture values: fr|en, gg',
                         'Rows with a blank culture value will be imported using AtoM\'s default source culture.',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [
+                    CsvValidatorResult::TEST_DETAILS => [
                         ',,,Chemise,,,,fr|en',
                         'D20202,DJ002,,Voûte, étagère 0074,,,,gg',
                     ],

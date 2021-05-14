@@ -129,7 +129,7 @@ class CsvParentTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($options[CsvValidatorResult::TEST_TITLE], $result[CsvValidatorResult::TEST_TITLE]);
         $this->assertSame($options[CsvValidatorResult::TEST_STATUS], $result[CsvValidatorResult::TEST_STATUS]);
         $this->assertSame($options[CsvValidatorResult::TEST_RESULTS], $result[CsvValidatorResult::TEST_RESULTS]);
-        $this->assertSame($options[CsvValidatorResult::TEST_DETAIL], $result[CsvValidatorResult::TEST_DETAIL]);
+        $this->assertSame($options[CsvValidatorResult::TEST_DETAILS], $result[CsvValidatorResult::TEST_DETAILS]);
     }
 
     public function csvValidatorTestProvider()
@@ -169,7 +169,7 @@ class CsvParentTest extends \PHPUnit\Framework\TestCase
                     CsvValidatorResult::TEST_RESULTS => [
                         "'parentId' and 'qubitParentSlugColumnPresent' columns not present. CSV contents will be imported as top level records.",
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [
+                    CsvValidatorResult::TEST_DETAILS => [
                     ],
                 ],
             ],
@@ -190,7 +190,7 @@ class CsvParentTest extends \PHPUnit\Framework\TestCase
                         "'source' option not specified. Unable to check parentId values against AtoM's database.",
                         'Number of rows for which parents could not be found (will import as top level records): 3',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [
+                    CsvValidatorResult::TEST_DETAILS => [
                         'DJ001,ID1,Some Photographs,,Extent and medium 1,,',
                         'DJ002,,Voûte, étagère 0074,,,,',
                         'DJ003,ID4,Title Four,,,,en',
@@ -211,7 +211,7 @@ class CsvParentTest extends \PHPUnit\Framework\TestCase
                     CsvValidatorResult::TEST_RESULTS => [
                         'Rows with parentId populated: 0',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [
+                    CsvValidatorResult::TEST_DETAILS => [
                     ],
                 ],
             ],
@@ -231,7 +231,7 @@ class CsvParentTest extends \PHPUnit\Framework\TestCase
                         "'source' option not specified. Unable to check parentId values against AtoM's database.",
                         'Number of rows for which parents could not be found (will import as top level records): 3',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [
+                    CsvValidatorResult::TEST_DETAILS => [
                         'B10101,DJ001,ID1,Some Photographs,,Extent and medium 1,,',
                         'D20202,DJ002,,Voûte, étagère 0074,,,,',
                         ',DJ003,ID4,Title Four,,,,en',
@@ -252,7 +252,7 @@ class CsvParentTest extends \PHPUnit\Framework\TestCase
                     CsvValidatorResult::TEST_RESULTS => [
                         'Rows with parentId populated: 1',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [
+                    CsvValidatorResult::TEST_DETAILS => [
                     ],
                 ],
             ],
@@ -271,7 +271,7 @@ class CsvParentTest extends \PHPUnit\Framework\TestCase
                     CsvValidatorResult::TEST_RESULTS => [
                         'Rows with parentId populated: 1',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [
+                    CsvValidatorResult::TEST_DETAILS => [
                     ],
                 ],
             ],
@@ -291,7 +291,7 @@ class CsvParentTest extends \PHPUnit\Framework\TestCase
                         "'source' option not specified. Unable to check parentId values against AtoM's database.",
                         'Number of rows for which parents could not be found (will import as top level records): 1',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [
+                    CsvValidatorResult::TEST_DETAILS => [
                         'D20202,A10101,,Voûte, étagère 0074,,,,',
                     ],
                 ],
@@ -311,7 +311,7 @@ class CsvParentTest extends \PHPUnit\Framework\TestCase
                     CsvValidatorResult::TEST_RESULTS => [
                         'Rows with parentId populated: 1',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [
+                    CsvValidatorResult::TEST_DETAILS => [
                     ],
                 ],
             ],
@@ -330,7 +330,7 @@ class CsvParentTest extends \PHPUnit\Framework\TestCase
                         'Rows with qubitParentSlug populated: 2',
                         'Number of rows for which parents could not be found (will import as top level records): 1',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [
+                    CsvValidatorResult::TEST_DETAILS => [
                         'X7,missing-slug,TY99,Some stuff,,,,en',
                     ],
                 ],
@@ -352,7 +352,7 @@ class CsvParentTest extends \PHPUnit\Framework\TestCase
                         'Rows with both \'parentId\' and \'qubitParentSlug\' populated: 1',
                         'Column \'qubitParentSlug\' will override \'parentId\' if both are populated.',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [
+                    CsvValidatorResult::TEST_DETAILS => [
                     ],
                 ],
             ],

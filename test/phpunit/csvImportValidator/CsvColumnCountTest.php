@@ -90,7 +90,7 @@ class CsvColumnCountTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($options[CsvValidatorResult::TEST_TITLE], $result[CsvValidatorResult::TEST_TITLE]);
         $this->assertSame($options[CsvValidatorResult::TEST_STATUS], $result[CsvValidatorResult::TEST_STATUS]);
         $this->assertSame($options[CsvValidatorResult::TEST_RESULTS], $result[CsvValidatorResult::TEST_RESULTS]);
-        $this->assertSame($options[CsvValidatorResult::TEST_DETAIL], $result[CsvValidatorResult::TEST_DETAIL]);
+        $this->assertSame($options[CsvValidatorResult::TEST_DETAILS], $result[CsvValidatorResult::TEST_DETAILS]);
     }
 
     public function csvValidatorTestProvider()
@@ -126,7 +126,7 @@ class CsvColumnCountTest extends \PHPUnit\Framework\TestCase
                     CsvValidatorResult::TEST_RESULTS => [
                         'Number of columns in CSV: 8',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [],
+                    CsvValidatorResult::TEST_DETAILS => [],
                 ],
             ],
 
@@ -145,7 +145,7 @@ class CsvColumnCountTest extends \PHPUnit\Framework\TestCase
                         'Number of columns in CSV: 1',
                         'CSV appears to have only one column - check CSV separator option matches file.',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [],
+                    CsvValidatorResult::TEST_DETAILS => [],
                 ],
             ],
 
@@ -164,7 +164,7 @@ class CsvColumnCountTest extends \PHPUnit\Framework\TestCase
                         'Number of rows with 8 columns: 4',
                         'CSV rows with different lengths detected - check CSV enclosure option matches file.',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [],
+                    CsvValidatorResult::TEST_DETAILS => [],
                 ],
             ],
 
@@ -183,7 +183,7 @@ class CsvColumnCountTest extends \PHPUnit\Framework\TestCase
                         'Number of rows with 8 columns: 4',
                         'CSV rows with different lengths detected - check CSV enclosure option matches file.',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [],
+                    CsvValidatorResult::TEST_DETAILS => [],
                 ],
             ],
 
@@ -202,7 +202,7 @@ class CsvColumnCountTest extends \PHPUnit\Framework\TestCase
                         'Number of rows with 7 columns: 1',
                         'CSV rows with different lengths detected - check CSV enclosure option matches file.',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [],
+                    CsvValidatorResult::TEST_DETAILS => [],
                 ],
             ],
 
@@ -221,7 +221,7 @@ class CsvColumnCountTest extends \PHPUnit\Framework\TestCase
                         'Number of rows with 9 columns: 1',
                         'CSV rows with different lengths detected - check CSV enclosure option matches file.',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [],
+                    CsvValidatorResult::TEST_DETAILS => [],
                 ],
             ],
 
@@ -241,7 +241,7 @@ class CsvColumnCountTest extends \PHPUnit\Framework\TestCase
                         'Number of rows with 6 columns: 1',
                         'CSV rows with different lengths detected - check CSV enclosure option matches file.',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [],
+                    CsvValidatorResult::TEST_DETAILS => [],
                 ],
             ],
 
@@ -261,7 +261,7 @@ class CsvColumnCountTest extends \PHPUnit\Framework\TestCase
                         'Number of rows with 9 columns: 1',
                         'CSV rows with different lengths detected - check CSV enclosure option matches file.',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [],
+                    CsvValidatorResult::TEST_DETAILS => [],
                 ],
             ],
         ];

@@ -53,7 +53,7 @@ class CsvSampleValuesTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($options[CsvValidatorResult::TEST_TITLE], $result[CsvValidatorResult::TEST_TITLE]);
         $this->assertSame($options[CsvValidatorResult::TEST_STATUS], $result[CsvValidatorResult::TEST_STATUS]);
         $this->assertSame($options[CsvValidatorResult::TEST_RESULTS], $result[CsvValidatorResult::TEST_RESULTS]);
-        $this->assertSame($options[CsvValidatorResult::TEST_DETAIL], $result[CsvValidatorResult::TEST_DETAIL]);
+        $this->assertSame($options[CsvValidatorResult::TEST_DETAILS], $result[CsvValidatorResult::TEST_DETAILS]);
     }
 
     public function csvValidatorTestProvider()
@@ -85,7 +85,7 @@ class CsvSampleValuesTest extends \PHPUnit\Framework\TestCase
                         'extentAndMedium:  Extent and medium 1',
                         'culture:  fr',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [],
+                    CsvValidatorResult::TEST_DETAILS => [],
                 ],
             ],
         ];

@@ -79,7 +79,7 @@ class CsvDigitalObjectPathTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($options[CsvValidatorResult::TEST_TITLE], $result[CsvValidatorResult::TEST_TITLE]);
         $this->assertSame($options[CsvValidatorResult::TEST_STATUS], $result[CsvValidatorResult::TEST_STATUS]);
         $this->assertSame($options[CsvValidatorResult::TEST_RESULTS], $result[CsvValidatorResult::TEST_RESULTS]);
-        $this->assertSame($options[CsvValidatorResult::TEST_DETAIL], $result[CsvValidatorResult::TEST_DETAIL]);
+        $this->assertSame($options[CsvValidatorResult::TEST_DETAILS], $result[CsvValidatorResult::TEST_DETAILS]);
     }
 
     public function csvValidatorTestProvider()
@@ -113,7 +113,7 @@ class CsvDigitalObjectPathTest extends \PHPUnit\Framework\TestCase
                     CsvValidatorResult::TEST_RESULTS => [
                         "Column 'digitalObjectPath' not present in CSV. Nothing to verify.",
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [
+                    CsvValidatorResult::TEST_DETAILS => [
                     ],
                 ],
             ],
@@ -132,7 +132,7 @@ class CsvDigitalObjectPathTest extends \PHPUnit\Framework\TestCase
                         "Column 'digitalObjectPath' found.",
                         'Digital object folder location not specified.',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [
+                    CsvValidatorResult::TEST_DETAILS => [
                     ],
                 ],
             ],
@@ -155,7 +155,7 @@ class CsvDigitalObjectPathTest extends \PHPUnit\Framework\TestCase
                         "Column 'digitalObjectPath' found.",
                         "Column 'digitalObjectPath' is empty.",
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [
+                    CsvValidatorResult::TEST_DETAILS => [
                     ],
                 ],
             ],
@@ -182,7 +182,7 @@ class CsvDigitalObjectPathTest extends \PHPUnit\Framework\TestCase
                         'Digital objects in folder not referenced by CSV: 1',
                         'Digital object referenced by CSV not found in folder: 2',
                     ],
-                    CsvValidatorResult::TEST_DETAIL => [
+                    CsvValidatorResult::TEST_DETAILS => [
                         "Number of duplicates for path 'a.png': 2",
                         "Number of duplicates for path 'b.png': 2",
                         'Unreferenced digital object: c.png',
