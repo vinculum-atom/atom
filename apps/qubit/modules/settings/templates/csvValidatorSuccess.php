@@ -28,7 +28,6 @@
 
         <?php echo $form->csv_validator_default_import_behaviour
             ->label(__('CSV Validator default behaviour when CSV Import is run'))
-            ->help(__('Configure the CSV Validator to validate CSV contents prior to import'))
             ->renderRow(); ?>
 
       </fieldset>

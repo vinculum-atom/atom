@@ -34,7 +34,7 @@ class arMigration0191
         if (null === QubitSetting::getByName('csv_validator_default_import_behaviour')) {
             $setting = new QubitSetting();
             $setting->name = 'csv_validator_default_import_behaviour';
-            $setting->value = 0;
+            $setting->value = SettingsCsvValidatorAction::VALIDATOR_OFF;
             $setting->editable = 1;
             $setting->source_culture = 'en';
             $setting->save();

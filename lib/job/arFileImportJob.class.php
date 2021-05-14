@@ -43,19 +43,32 @@ class arFileImportJob extends arBaseJob
         try {
             switch ($parameters['importType']) {
                 case 'csv':
+                    // Check if we need to run the CSV Validator.
+                    // if so, run it.
+                    $this->info("SBSBSB A: " . sfConfig::get('app_csv_validator_default_import_behaviour', SettingsCsvValidatorAction::VALIDATOR_OFF));
+                    if (SettingsCsvValidatorAction::VALIDATOR_OFF < sfConfig::get('app_csv_validator_default_import_behaviour', SettingsCsvValidatorAction::VALIDATOR_OFF)) {
+                        $this->info("SBSBSB a");
+                        $validatorOptions = [];
+                        $filenames = [$parameters['file']['tmp_name']];
+                        $validator = new CsvImportValidator(
+                            $this->context, null, $validatorOptions);
+                        $validator->setFilenames($filenames);
+                        $results = $validator->validate();
+                        $output = CsvValidatorResultCollection::renderResultsAsText($results, true);
+                        $this->info($output);
+                        unset($validator);
+                    }
+                    // If result is ERROR (or WARN dep...) then prevent import.
+                    $this->info("SBSBSB B");
                     $importer = new QubitCsvImport();
-
                     $this->setCsvImportParams($importer, $parameters);
-
                     $importer->import($parameters['file']['tmp_name'], $parameters['objectType'], $parameters['file']['name']);
-
+                    $this->info("SBSBSB C");
                     break;
 
                 case 'xml':
                     $importer = new QubitXmlImport();
-
                     $options = $this->setXmlImportParams($importer, $parameters);
-
                     $importer->import($parameters['file']['tmp_name'], $options, $parameters['file']['name']);
 
                     break;
@@ -82,7 +95,7 @@ class arFileImportJob extends arBaseJob
 
             return false;
         }
-
+        $this->info("SBSBSB D");
         if ($importer->hasErrors()) {
             foreach ($importer->getErrors() as $error) {
                 $this->info($error);
@@ -97,6 +110,7 @@ class arFileImportJob extends arBaseJob
 
         // Mark job as complete.
         $this->info($this->i18n->__('Import complete.'));
+        $this->info("SBSBSB E");
         $this->job->setStatusCompleted();
         $this->job->save();
 

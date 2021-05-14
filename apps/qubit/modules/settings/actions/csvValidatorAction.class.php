@@ -19,6 +19,10 @@
 
 class SettingsCsvValidatorAction extends SettingsEditAction
 {
+    const VALIDATOR_OFF = 0;
+    const VALIDATOR_PERMISSIVE = 1;
+    const VALIDATOR_STRICT = 2;
+
     public static $NAMES = [
         'csv_validator_default_import_behaviour',
     ];
@@ -41,9 +45,9 @@ class SettingsCsvValidatorAction extends SettingsEditAction
                 $this->form->setValidator($name, new sfValidatorString(['required' => false]));
                 $this->form->setWidget($name, new sfWidgetFormSelectRadio(
                     ['choices' => [
-                        0 => $this->i18n->__('Off - validation is not run before CSV imports'),
-                        1 => $this->i18n->__('Permissive - validation is run; warnings are ignored'),
-                        2 => $this->i18n->__('Strict - validation is run; warnings will halt import from running'),
+                        self::VALIDATOR_OFF => $this->i18n->__('Off - validation is not run before CSV imports'),
+                        self::VALIDATOR_PERMISSIVE => $this->i18n->__('Permissive - validation is run; warnings are ignored'),
+                        self::VALIDATOR_STRICT => $this->i18n->__('Strict - validation is run; warnings will halt import from running'),
                     ]],
                     ['class' => 'radio']
                 ));
