@@ -17,11 +17,11 @@
  * along with Access to Memory (AtoM).  If not, see <http://www.gnu.org/licenses/>.
  */
 
-class arArchivesCanadaPluginConfiguration extends sfPluginConfiguration
+class arVPluginConfiguration extends sfPluginConfiguration
 {
   public static
-    $summary = 'Theme plugin, extension of arDominionPlugin.',
-    $version = '0.0.1';
+    $summary = 'Theme plugin, extension of arDominionPlugin and build upon arArchivesCanadaPlugin for the ERC VINCULUM project.',
+    $version = '0.0.2';
 
   public function contextLoadFactories(sfEvent $event)
   {
@@ -32,11 +32,11 @@ class arArchivesCanadaPluginConfiguration extends sfPluginConfiguration
     if ($context->getConfiguration()->isDebug())
     {
       $context->response->addJavaScript('/vendor/less.js', 'last');
-      $context->response->addStylesheet('/plugins/arArchivesCanadaPlugin/css/main.less', 'last', array('rel' => 'stylesheet/less', 'type' => 'text/css', 'media' => 'all'));
+      $context->response->addStylesheet('/plugins/arVPlugin/css/main.less', 'last', array('rel' => 'stylesheet/less', 'type' => 'text/css', 'media' => 'all'));
     }
     else
     {
-      $context->response->addStylesheet('/plugins/arArchivesCanadaPlugin/css/min.css', 'last', array('media' => 'all'));
+      $context->response->addStylesheet('/plugins/arVPlugin/css/min.css', 'last', array('media' => 'all'));
     }
   }
 
