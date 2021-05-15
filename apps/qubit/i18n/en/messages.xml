@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
+<xliff version="1.0">
+  <file source-language="en" target-language="en" datatype="plaintext" original="messages" date="2020-09-30T17:10:54Z" product-name="messages">
+    <header/>
+    <body>
+
+<trans-unit id="312386841084261c610413fa4de8b7505f469407">
+  <source>Repository</source>
+  <target>Entail/ Vínculo</target>
+  <note>https://github.com/artefactual/atom/blob/master/apps/qubit/modules/search/templates/_advancedSearch.php</note>
+</trans-unit>
+
+<trans-unit id="0e8881271ff69b83f18ee1284fadbbaa3351dd18">
+  <source>Extent and medium</source>
+  <target>Archival reference</target>
+  <note>https://github.com/artefactual/atom/blob/master/apps/qubit/modules/search/templates/_advancedSearch.php</note>
+</trans-unit>
+
+<trans-unit id="ff0041634809ff3c6e0ce164139cd538f87a1198">
+  <source>Maintained by</source>
+  <target>Entail/ Vínculo</target>
+  <note>https://github.com/artefactual/atom/blob/master/apps/qubit/modules/actor/templates/browseSuccess.php</note>
+</trans-unit>
+
+
+<trans-unit id="41e610ea3f6a08f1de55d8da43d82bb1df35d3c0">
+  <source>Name of creator</source>
+  <target>Creator/ accumulator</target>
+  <note>https://github.com/artefactual/atom/blob/master/apps/qubit/modules/informationobject/templates/_creatorDetail.php</note>
+</trans-unit>
+
+<trans-unit id="72f9d3399791989fdf85898ef348becf26b66e90">
+  <source>Holdings</source>
+  <target>Documents</target>
+  <note>https://github.com/artefactual/atom/blob/master/apps/qubit/modules/informationobject/templates/_treeView.php</note>
+</trans-unit>
+
+<trans-unit id="312386841084261c610413fa4de8b7505f469407">
+  <source>Repository</source>
+  <target>Entail/ Vínculo</target>
+  <note>https://github.com/artefactual/atom/blob/master/apps/qubit/modules/object/templates/importSelectSuccess.php</note>
+</trans-unit>
+
+<trans-unit id="3e8e2a2e9fd7f737bcdc670e7628ea27668b9e34">
+  <source>Maintainer of</source>
+  <target>Related people and institutions</target>
+  <note>https://github.com/artefactual/atom/blob/master/apps/qubit/modules/repository/actions/maintainedActorsComponent.class.php</note>
+</trans-unit>
+
+<trans-unit id="5feeb39917011514883c5f8372e96036f689e6db">
+  <source>Search holdings</source>
+  <target>Search documents</target>
+  <note>https://github.com/artefactual/atom/blob/master/apps/qubit/modules/repository/templates/_holdings.php</note>
+</trans-unit>
+
+<trans-unit id="0d83fd488d449ec8ef6ad5f4da7801e1aa505153">
+  <source>Browse %1% holdings</source>
+  <target>Browse %1% documents</target>
+  <note>https://github.com/artefactual/atom/blob/master/apps/qubit/modules/repository/templates/_holdingsList.php</note>
+</trans-unit>
+
+<trans-unit id="ad092b8d511a393f3b20845cbd99a66c962f1e85">
+  <source>Description identifier</source>
+  <target>Digital identifier</target>
+  <note>https://github.com/artefactual/atom/blob/master/apps/qubit/modules/settings/templates/visibleElementsSuccess.php</note>
+</trans-unit>
+
+    </body>
+  </file>
+</xliff>
+
