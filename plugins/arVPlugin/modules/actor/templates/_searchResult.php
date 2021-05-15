@@ -42,6 +42,23 @@
         <li><?php echo render_value_inline($dates) ?></li>
       <?php endif; ?>
 
+      <li>
+        <?php
+        $criteria = new Criteria();
+        $criteria->addJoin(QubitActor::ID, QubitActorI18n::ID);
+        $criteria->add(QubitActorI18n::AUTHORIZED_FORM_OF_NAME, $doc['i18n']['en']['authorizedFormOfName']);
+
+        $criteria->addJoin(QubitActor::ID, QubitRelation::OBJECT_ID);
+        $criteria->add(QubitRelation::TYPE_ID, QubitTerm::MAINTAINING_REPOSITORY_RELATION_ID);
+        $criteria->add(QubitRelation::SUBJECT_ID, $doc['maintainingRepositoryId']);
+
+        $r = QubitActor::getOne($criteria, []);
+        if ($r !== null) {
+          $repository = $r->getMaintainingRepository();
+          echo render_title($repository);
+	}
+        ?>
+      </li>
     </ul>
 
     <?php if (null !== $history = get_search_i18n($doc, 'history', array('culture' => $culture))): ?>

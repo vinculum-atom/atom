@@ -8,7 +8,7 @@
 
 <?php slot('title') ?>
   <div class="multiline-header">
-    <?php echo image_tag('/images/icons-large/icon-people.png', array('alt' => '')) ?>
+    <?php echo image_tag('/plugins/arVPlugin/images/icons-large/icon-people.png', array('alt' => '')) ?>
     <h1 aria-describedby="results-label">
       <?php if (isset($pager) && $pager->getNbResults()): ?>
         <?php echo __('Showing %1% results', array('%1%' => $pager->getNbResults())) ?>
@@ -112,15 +112,11 @@
 
 <?php slot('content') ?>
 
-  <?php echo get_partial('actor/advancedSearch',
-    array(
-      'criteria'     => $search->criteria,
-      'form'         => $form,
-      'fieldOptions' => $fieldOptions,
-      'hiddenFields' => $hiddenFields,
-      'show'         => $showAdvanced,
-    )
-  ) ?>
+  <?php echo get_partial('actor/advancedSearch', array(
+    'criteria'     => $search->criteria,
+    'form'         => $form,
+    'fieldOptions' => $fieldOptions,
+    'hiddenFields' => $hiddenFields)) ?>
 
   <?php if (isset($pager) && $pager->getNbResults()): ?>
     <section class="browse-options">
@@ -140,7 +136,7 @@
 
       <?php foreach ($pager->getResults() as $hit): ?>
         <?php $doc = $hit->getData() ?>
-        <?php echo include_partial('actor/searchResult', array('doc' => $doc, 'pager' => $pager, 'culture' => $selectedCulture)) ?>
+        <?php echo include_partial('actor/searchResult', array('doc' => $doc, 'pager' => $pager, 'culture' => $selectedCulture, 'aggs' => $aggs)) ?>
       <?php endforeach; ?>
 
     </div>
