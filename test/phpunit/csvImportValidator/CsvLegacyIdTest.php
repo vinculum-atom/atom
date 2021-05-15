@@ -93,9 +93,6 @@ class CsvLegacyIdTest extends \PHPUnit\Framework\TestCase
                     'csvValidatorClasses' => ['CsvLegacyIdValidator' => CsvLegacyIdValidator::class],
                     'filename' => '/unix_csv_missing_legacy_id.csv',
                     'testname' => 'CsvLegacyIdValidator',
-                    'validatorOptions' => [
-                        'verbose' => true,
-                    ],
                     CsvValidatorResult::TEST_TITLE => CsvLegacyIdValidator::TITLE,
                     CsvValidatorResult::TEST_STATUS => CsvValidatorResult::RESULT_WARN,
                     CsvValidatorResult::TEST_RESULTS => [
@@ -111,9 +108,6 @@ class CsvLegacyIdTest extends \PHPUnit\Framework\TestCase
                     'csvValidatorClasses' => ['CsvLegacyIdValidator' => CsvLegacyIdValidator::class],
                     'filename' => '/unix_csv_without_utf8_bom.csv',
                     'testname' => 'CsvLegacyIdValidator',
-                    'validatorOptions' => [
-                        'verbose' => true,
-                    ],
                     CsvValidatorResult::TEST_TITLE => CsvLegacyIdValidator::TITLE,
                     CsvValidatorResult::TEST_STATUS => CsvValidatorResult::RESULT_WARN,
                     CsvValidatorResult::TEST_RESULTS => [
@@ -133,9 +127,6 @@ class CsvLegacyIdTest extends \PHPUnit\Framework\TestCase
                     'csvValidatorClasses' => ['CsvLegacyIdValidator' => CsvLegacyIdValidator::class],
                     'filename' => '/unix_csv_with_duplicated_legacy_id.csv',
                     'testname' => 'CsvLegacyIdValidator',
-                    'validatorOptions' => [
-                        'verbose' => true,
-                    ],
                     CsvValidatorResult::TEST_TITLE => CsvLegacyIdValidator::TITLE,
                     CsvValidatorResult::TEST_STATUS => CsvValidatorResult::RESULT_ERROR,
                     CsvValidatorResult::TEST_RESULTS => [
@@ -153,11 +144,10 @@ class CsvLegacyIdTest extends \PHPUnit\Framework\TestCase
     }
 
     // Generic Validation
-    protected function runValidator($csvValidator, $filenames, $tests, $verbose = true)
+    protected function runValidator($csvValidator, $filenames, $tests)
     {
         $csvValidator->setCsvTests($tests);
         $csvValidator->setFilenames(explode(',', $filenames));
-        $csvValidator->setVerbose($verbose);
 
         return $csvValidator->validate();
     }

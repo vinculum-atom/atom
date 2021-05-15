@@ -50,18 +50,6 @@ class CsvValidatorResultTest extends \PHPUnit\Framework\TestCase
         $this->assertSame('Classname', $csvValidator->getClassname());
     }
 
-    public function testSetVerbosityOption()
-    {
-        $csvValidator = new CsvValidatorResult();
-        $this->assertSame(false, $csvValidator->getVerbosity());
-
-        $csvValidator->setVerbosity(true);
-        $this->assertSame(true, $csvValidator->getVerbosity());
-
-        $csvValidator = new CsvValidatorResult('Title', 'Filename', 'Classname', true);
-        $this->assertSame(true, $csvValidator->getVerbosity());
-    }
-
     public function testSetStatus()
     {
         $csvValidator = new CsvValidatorResult('Title', 'Filename', 'Classname', true);

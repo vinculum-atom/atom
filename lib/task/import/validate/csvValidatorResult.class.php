@@ -38,9 +38,8 @@ class CsvValidatorResult
     protected $filename;
     protected $classname;
 
-    public function __construct(string $title = '', string $filename = '', string $classname = '', bool $verbose = false)
+    public function __construct(string $title = '', string $filename = '', string $classname = '')
     {
-        $this->verbose = $verbose;
         $this->filename = $filename;
         $this->classname = $classname;
 
@@ -129,16 +128,6 @@ class CsvValidatorResult
     public function setClassname(string $classname)
     {
         $this->classname = $classname;
-    }
-
-    public function getVerbosity(): bool
-    {
-        return $this->verbose;
-    }
-
-    public function setVerbosity(bool $verbose)
-    {
-        $this->verbose = $verbose;
     }
 
     public function toArray()

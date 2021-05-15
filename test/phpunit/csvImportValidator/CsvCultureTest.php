@@ -101,9 +101,6 @@ class CsvCultureTest extends \PHPUnit\Framework\TestCase
                     'csvValidatorClasses' => ['CsvCultureValidator' => CsvCultureValidator::class],
                     'filename' => '/unix_csv_missing_culture.csv',
                     'testname' => 'CsvCultureValidator',
-                    'validatorOptions' => [
-                        'verbose' => true,
-                    ],
                     CsvValidatorResult::TEST_TITLE => CsvCultureValidator::TITLE,
                     CsvValidatorResult::TEST_STATUS => CsvValidatorResult::RESULT_WARN,
                     CsvValidatorResult::TEST_RESULTS => [
@@ -120,9 +117,6 @@ class CsvCultureTest extends \PHPUnit\Framework\TestCase
                     'csvValidatorClasses' => ['CsvCultureValidator' => CsvCultureValidator::class],
                     'filename' => '/unix_csv_valid_cultures.csv',
                     'testname' => 'CsvCultureValidator',
-                    'validatorOptions' => [
-                        'verbose' => true,
-                    ],
                     CsvValidatorResult::TEST_TITLE => CsvCultureValidator::TITLE,
                     CsvValidatorResult::TEST_STATUS => CsvValidatorResult::RESULT_INFO,
                     CsvValidatorResult::TEST_RESULTS => [
@@ -138,9 +132,6 @@ class CsvCultureTest extends \PHPUnit\Framework\TestCase
                     'csvValidatorClasses' => ['CsvCultureValidator' => CsvCultureValidator::class],
                     'filename' => '/unix_csv_cultures_some_invalid.csv',
                     'testname' => 'CsvCultureValidator',
-                    'validatorOptions' => [
-                        'verbose' => true,
-                    ],
                     CsvValidatorResult::TEST_TITLE => CsvCultureValidator::TITLE,
                     CsvValidatorResult::TEST_STATUS => CsvValidatorResult::RESULT_ERROR,
                     CsvValidatorResult::TEST_RESULTS => [
@@ -161,11 +152,10 @@ class CsvCultureTest extends \PHPUnit\Framework\TestCase
     }
 
     // Generic Validation
-    protected function runValidator($csvValidator, $filenames, $tests, $verbose = true)
+    protected function runValidator($csvValidator, $filenames, $tests)
     {
         $csvValidator->setCsvTests($tests);
         $csvValidator->setFilenames(explode(',', $filenames));
-        $csvValidator->setVerbose($verbose);
 
         return $csvValidator->validate();
     }

@@ -50,13 +50,6 @@ class CsvValidatorTest extends \PHPUnit\Framework\TestCase
         $csvValidator->setOption('className', 'QubitProperty');
     }
 
-    public function testSetValidVerboseTypeOption()
-    {
-        $csvValidator = new CsvImportValidator($this->context, null, null);
-        $csvValidator->setOption('verbose', true);
-        $this->assertSame(true, $csvValidator->getOption('verbose'));
-    }
-
     public function testSetSourceOption()
     {
         $csvValidator = new CsvImportValidator($this->context, null, null);
@@ -109,7 +102,6 @@ class CsvValidatorTest extends \PHPUnit\Framework\TestCase
     public function testDefaultOptions()
     {
         $csvValidator = new CsvImportValidator($this->context, null, null);
-        $this->assertSame(false, $csvValidator->getOption('verbose'));
         $this->assertSame('QubitInformationObject', $csvValidator->getOption('className'));
         $this->assertSame('', $csvValidator->getOption('source'));
         $this->assertSame(',', $csvValidator->getOption('separator'));

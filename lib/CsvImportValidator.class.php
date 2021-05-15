@@ -53,7 +53,6 @@ class CsvImportValidator
     // Assumes QubitInformationObject if className option not set.
     protected $validatorOptions = [
         'className' => 'QubitInformationObject',
-        'verbose' => false,
         'source' => '',
         'separator' => ',',
         'enclosure' => '"',
@@ -266,11 +265,6 @@ class CsvImportValidator
 
                 break;
 
-            case 'verbose':
-                $this->setVerbose($value);
-
-                break;
-
             case 'source':
                 $this->setSource($value);
 
@@ -339,11 +333,6 @@ class CsvImportValidator
         } else {
             throw new UnexpectedValueException(sprintf('Invalid option "%s".', $name));
         }
-    }
-
-    public function setVerbose(bool $value)
-    {
-        $this->validatorOptions['verbose'] = $value;
     }
 
     public function setSource(string $value)

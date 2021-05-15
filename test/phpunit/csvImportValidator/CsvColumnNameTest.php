@@ -81,7 +81,6 @@ class CsvColumnNameTest extends \PHPUnit\Framework\TestCase
                     'testname' => 'CsvColumnNameValidator',
                     'validatorOptions' => [
                         'source' => 'testsourcefile.csv',
-                        'verbose' => true,
                     ],
                     CsvValidatorResult::TEST_TITLE => CsvColumnNameValidator::TITLE,
                     CsvValidatorResult::TEST_STATUS => CsvValidatorResult::RESULT_INFO,
@@ -101,7 +100,6 @@ class CsvColumnNameTest extends \PHPUnit\Framework\TestCase
                     'validatorOptions' => [
                         'source' => 'testsourcefile.csv',
                         'className' => 'QubitInformationObject',
-                        'verbose' => true,
                     ],
                     CsvValidatorResult::TEST_TITLE => CsvColumnNameValidator::TITLE,
                     CsvValidatorResult::TEST_STATUS => CsvValidatorResult::RESULT_INFO,
@@ -121,7 +119,6 @@ class CsvColumnNameTest extends \PHPUnit\Framework\TestCase
                     'validatorOptions' => [
                         'source' => 'testsourcefile.csv',
                         'className' => 'QubitInformationObject',
-                        'verbose' => true,
                     ],
                     CsvValidatorResult::TEST_TITLE => CsvColumnNameValidator::TITLE,
                     CsvValidatorResult::TEST_STATUS => CsvValidatorResult::RESULT_WARN,
@@ -143,7 +140,6 @@ class CsvColumnNameTest extends \PHPUnit\Framework\TestCase
                     'validatorOptions' => [
                         'source' => 'testsourcefile.csv',
                         'className' => 'QubitInformationObject',
-                        'verbose' => true,
                     ],
                     CsvValidatorResult::TEST_TITLE => CsvColumnNameValidator::TITLE,
                     CsvValidatorResult::TEST_STATUS => CsvValidatorResult::RESULT_WARN,
@@ -165,11 +161,10 @@ class CsvColumnNameTest extends \PHPUnit\Framework\TestCase
     }
 
     // Generic Validation
-    protected function runValidator($csvValidator, $filenames, $tests, $verbose = true)
+    protected function runValidator($csvValidator, $filenames, $tests)
     {
         $csvValidator->setCsvTests($tests);
         $csvValidator->setFilenames(explode(',', $filenames));
-        $csvValidator->setVerbose($verbose);
 
         return $csvValidator->validate();
     }

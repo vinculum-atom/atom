@@ -90,9 +90,6 @@ class CsvEmptyRowTest extends \PHPUnit\Framework\TestCase
                     'csvValidatorClasses' => ['CsvEmptyRowValidator' => CsvEmptyRowValidator::class],
                     'filename' => '/unix_csv_without_utf8_bom.csv',
                     'testname' => 'CsvEmptyRowValidator',
-                    'validatorOptions' => [
-                        'verbose' => true,
-                    ],
                     CsvValidatorResult::TEST_TITLE => CsvEmptyRowValidator::TITLE,
                     CsvValidatorResult::TEST_STATUS => CsvValidatorResult::RESULT_INFO,
                     CsvValidatorResult::TEST_RESULTS => [
@@ -107,9 +104,6 @@ class CsvEmptyRowTest extends \PHPUnit\Framework\TestCase
                     'csvValidatorClasses' => ['CsvEmptyRowValidator' => CsvEmptyRowValidator::class],
                     'filename' => '/unix_csv_with_empty_rows.csv',
                     'testname' => 'CsvEmptyRowValidator',
-                    'validatorOptions' => [
-                        'verbose' => true,
-                    ],
                     CsvValidatorResult::TEST_TITLE => CsvEmptyRowValidator::TITLE,
                     CsvValidatorResult::TEST_STATUS => CsvValidatorResult::RESULT_ERROR,
                     CsvValidatorResult::TEST_RESULTS => [
@@ -126,9 +120,6 @@ class CsvEmptyRowTest extends \PHPUnit\Framework\TestCase
                     'csvValidatorClasses' => ['CsvEmptyRowValidator' => CsvEmptyRowValidator::class],
                     'filename' => '/unix_csv_with_empty_rows_with_commas.csv',
                     'testname' => 'CsvEmptyRowValidator',
-                    'validatorOptions' => [
-                        'verbose' => true,
-                    ],
                     CsvValidatorResult::TEST_TITLE => CsvEmptyRowValidator::TITLE,
                     CsvValidatorResult::TEST_STATUS => CsvValidatorResult::RESULT_ERROR,
                     CsvValidatorResult::TEST_RESULTS => [
@@ -145,9 +136,6 @@ class CsvEmptyRowTest extends \PHPUnit\Framework\TestCase
                     'csvValidatorClasses' => ['CsvEmptyRowValidator' => CsvEmptyRowValidator::class],
                     'filename' => '/unix_csv_with_empty_rows_header.csv',
                     'testname' => 'CsvEmptyRowValidator',
-                    'validatorOptions' => [
-                        'verbose' => true,
-                    ],
                     CsvValidatorResult::TEST_TITLE => CsvEmptyRowValidator::TITLE,
                     CsvValidatorResult::TEST_STATUS => CsvValidatorResult::RESULT_ERROR,
                     CsvValidatorResult::TEST_RESULTS => [
@@ -165,9 +153,6 @@ class CsvEmptyRowTest extends \PHPUnit\Framework\TestCase
                     'csvValidatorClasses' => ['CsvEmptyRowValidator' => CsvEmptyRowValidator::class],
                     'filename' => '/unix_csv_with_empty_rows_header_with_commas.csv',
                     'testname' => 'CsvEmptyRowValidator',
-                    'validatorOptions' => [
-                        'verbose' => true,
-                    ],
                     CsvValidatorResult::TEST_TITLE => CsvEmptyRowValidator::TITLE,
                     CsvValidatorResult::TEST_STATUS => CsvValidatorResult::RESULT_ERROR,
                     CsvValidatorResult::TEST_RESULTS => [
@@ -183,11 +168,10 @@ class CsvEmptyRowTest extends \PHPUnit\Framework\TestCase
     }
 
     // Generic Validation
-    protected function runValidator($csvValidator, $filenames, $tests, $verbose = true)
+    protected function runValidator($csvValidator, $filenames, $tests)
     {
         $csvValidator->setCsvTests($tests);
         $csvValidator->setFilenames(explode(',', $filenames));
-        $csvValidator->setVerbose($verbose);
 
         return $csvValidator->validate();
     }

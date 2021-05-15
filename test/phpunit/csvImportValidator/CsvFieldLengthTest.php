@@ -111,9 +111,6 @@ class CsvFieldLengthTest extends \PHPUnit\Framework\TestCase
                     'csvValidatorClasses' => ['CsvFieldLengthValidator' => CsvFieldLengthValidator::class],
                     'filename' => '/unix_csv_missing_culture.csv',
                     'testname' => 'CsvFieldLengthValidator',
-                    'validatorOptions' => [
-                        'verbose' => true,
-                    ],
                     CsvValidatorResult::TEST_TITLE => CsvFieldLengthValidator::TITLE,
                     CsvValidatorResult::TEST_STATUS => CsvValidatorResult::RESULT_INFO,
                     CsvValidatorResult::TEST_RESULTS => [
@@ -129,9 +126,6 @@ class CsvFieldLengthTest extends \PHPUnit\Framework\TestCase
                     'csvValidatorClasses' => ['CsvFieldLengthValidator' => CsvFieldLengthValidator::class],
                     'filename' => '/unix_csv_cultures_some_invalid.csv',
                     'testname' => 'CsvFieldLengthValidator',
-                    'validatorOptions' => [
-                        'verbose' => true,
-                    ],
                     CsvValidatorResult::TEST_TITLE => CsvFieldLengthValidator::TITLE,
                     CsvValidatorResult::TEST_STATUS => CsvValidatorResult::RESULT_INFO,
                     CsvValidatorResult::TEST_RESULTS => [
@@ -148,9 +142,6 @@ class CsvFieldLengthTest extends \PHPUnit\Framework\TestCase
                     'csvValidatorClasses' => ['CsvFieldLengthValidator' => CsvFieldLengthValidator::class],
                     'filename' => '/unix_csv_culture_language_length_error.csv',
                     'testname' => 'CsvFieldLengthValidator',
-                    'validatorOptions' => [
-                        'verbose' => true,
-                    ],
                     CsvValidatorResult::TEST_TITLE => CsvFieldLengthValidator::TITLE,
                     CsvValidatorResult::TEST_STATUS => CsvValidatorResult::RESULT_WARN,
                     CsvValidatorResult::TEST_RESULTS => [
@@ -170,9 +161,6 @@ class CsvFieldLengthTest extends \PHPUnit\Framework\TestCase
                     'csvValidatorClasses' => ['CsvFieldLengthValidator' => CsvFieldLengthValidator::class],
                     'filename' => '/unix_csv_culture_language_length_errors.csv',
                     'testname' => 'CsvFieldLengthValidator',
-                    'validatorOptions' => [
-                        'verbose' => true,
-                    ],
                     CsvValidatorResult::TEST_TITLE => CsvFieldLengthValidator::TITLE,
                     CsvValidatorResult::TEST_STATUS => CsvValidatorResult::RESULT_WARN,
                     CsvValidatorResult::TEST_RESULTS => [
@@ -193,11 +181,10 @@ class CsvFieldLengthTest extends \PHPUnit\Framework\TestCase
     }
 
     // Generic Validation
-    protected function runValidator($csvValidator, $filenames, $tests, $verbose = true)
+    protected function runValidator($csvValidator, $filenames, $tests)
     {
         $csvValidator->setCsvTests($tests);
         $csvValidator->setFilenames(explode(',', $filenames));
-        $csvValidator->setVerbose($verbose);
 
         return $csvValidator->validate();
     }

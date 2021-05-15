@@ -106,9 +106,6 @@ class CsvDigitalObjectUriTest extends \PHPUnit\Framework\TestCase
                     'csvValidatorClasses' => ['CsvDigitalObjectUriValidator' => CsvDigitalObjectUriValidator::class],
                     'filename' => '/unix_csv_without_utf8_bom.csv',
                     'testname' => 'CsvDigitalObjectUriValidator',
-                    'validatorOptions' => [
-                        'verbose' => true,
-                    ],
                     CsvValidatorResult::TEST_TITLE => CsvDigitalObjectUriValidator::TITLE,
                     CsvValidatorResult::TEST_STATUS => CsvValidatorResult::RESULT_INFO,
                     CsvValidatorResult::TEST_RESULTS => [
@@ -124,9 +121,6 @@ class CsvDigitalObjectUriTest extends \PHPUnit\Framework\TestCase
                     'csvValidatorClasses' => ['CsvDigitalObjectUriValidator' => CsvDigitalObjectUriValidator::class],
                     'filename' => '/unix_csv_with_digital_object_cols.csv',
                     'testname' => 'CsvDigitalObjectUriValidator',
-                    'validatorOptions' => [
-                        'verbose' => true,
-                    ],
                     CsvValidatorResult::TEST_TITLE => CsvDigitalObjectUriValidator::TITLE,
                     CsvValidatorResult::TEST_STATUS => CsvValidatorResult::RESULT_INFO,
                     CsvValidatorResult::TEST_RESULTS => [
@@ -147,7 +141,6 @@ class CsvDigitalObjectUriTest extends \PHPUnit\Framework\TestCase
                         'source' => 'testsourcefile.csv',
                         'className' => 'QubitInformationObject',
                         'pathToDigitalObjects' => 'vfs://root/digital_objects',
-                        'verbose' => true,
                     ],
                     CsvValidatorResult::TEST_TITLE => CsvDigitalObjectUriValidator::TITLE,
                     CsvValidatorResult::TEST_STATUS => CsvValidatorResult::RESULT_ERROR,
@@ -167,11 +160,10 @@ class CsvDigitalObjectUriTest extends \PHPUnit\Framework\TestCase
     }
 
     // Generic Validation
-    protected function runValidator($csvValidator, $filenames, $tests, $verbose = true)
+    protected function runValidator($csvValidator, $filenames, $tests)
     {
         $csvValidator->setCsvTests($tests);
         $csvValidator->setFilenames(explode(',', $filenames));
-        $csvValidator->setVerbose($verbose);
 
         return $csvValidator->validate();
     }

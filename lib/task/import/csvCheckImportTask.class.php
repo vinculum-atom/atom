@@ -131,7 +131,6 @@ EOF;
         $opts = [];
 
         $keymap = [
-            'verbose' => 'verbose',
             'source' => 'source',
             'class-name' => 'className',
             'escape' => 'escape',
