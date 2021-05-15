@@ -33,25 +33,38 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: @serifFontFamily;
+  font-family: @sansFontFamily;
   font-weight: normal;
 }
 
 #content {
   h1,
   h2,
-  h3,
+  h3 {
+  text-shadow: 0.2px 0.2px 0.2px rgba(0, 0, 0, 0.7);
+  }
   h4,
   h5,
   h6 {
     font-family: @sansFontFamily;
   }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+line-height: 25px;
 }
 
-h1 { font-size: 22px; }
-h2 { font-size: 20px; }
-h3 { font-size: 19px; }
-h4 { font-size: 18px; }
+}
+
+h1 { font-size: 20px; }
+h2 { font-size: 18px; }
+h3 { font-size: 17px; }
+h4 { font-size: 16px; }
+
+
 
 #content h2 {
   font-size: 14px;
@@ -92,7 +105,14 @@ h1, h2, h3, h4, h5, h6,
 #context-menu #opening-times,
 #context-menu #physical-objects,
 .list-menu .more a {
-  color: @white;
+}
+
+.list-menu ul {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.list-menu li:hover a {
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 .pagination ul > li > a,
@@ -114,7 +134,9 @@ h1, h2, h3, h4, h5, h6,
 .sidebar-widget a,
 #facets .facet-body li.active a,
 #facets .facet-header p:hover:after {
-  color: @orange;
+  color: @yellow;
+  text-shadow: 0.2px 0.2px 0.2px rgba(0, 0, 0, 0.7);
+  text-decoration: none;
 }
 
 .search-filter,
@@ -123,28 +145,26 @@ h1, h2, h3, h4, h5, h6,
 #facets .facet-header p,
 #facets .facet.open .facet-header p,
 #facets .facet-header p:hover {
-  background-color: rgba(0, 0, 0, 0.10);
+  background-color: rgba(0, 0, 0, 0.02);
 }
 
 .sidebar-widget > div,
 .nav-pills .active a,
 .nav-pills li:hover a,
 .nav-pills .active:hover a,
-#facets .open .facet-header p,
-.list-menu ul {
-  background-color: rgba(0, 0, 0, 0.20);
+#facets .open .facet-header p {
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 #action-icons i,
 #sort-header .sort-options label,
 #sort-header .dropdown-selected span {
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, .25);
 }
 
 .sidebar-widget > div,
 .list-menu ul,
 .list-menu .more {
-  border-top: 1px solid @white;
+  border-top: 1px solid @grayLighter;
 }
 
 #facets .open .facet-header {
@@ -154,7 +174,6 @@ h1, h2, h3, h4, h5, h6,
 h1,
 #context-menu h4,
 #facets .content h3 {
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, .75);
 }
 
 h1 .count {
@@ -166,17 +185,16 @@ h1 .count {
 .search-filter {
   border: 0;
   .box-shadow(none);
-  color: @white;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, .25);
+  color: @grayDark;
   a {
-    color: @white;
+    color: @grayLight;
   }
 }
 
 // Treeview
 
 #treeview-header p {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: @grayDark;
   border-bottom: 1px solid @white;
 }
 
@@ -188,7 +206,7 @@ h1 .count {
   li {
     background-color: rgba(0, 0, 0, 0.1);
     &:hover {
-      background-color: rgba(255, 255, 255, 0);
+      background-color: @grayLighter;
     }
   }
 
@@ -200,7 +218,9 @@ h1 .count {
   .active {
     background-color: @white !important;
     a {
-      color: @orange;
+      color: @yellow;
+      text-shadow: 0.2px 0.2px 0.2px rgba(0, 0, 0, 0.7);
+      text-decoration: none;
     }
   }
 
@@ -246,15 +266,15 @@ h1 .count {
   border-bottom: 1px solid @white;
 
   li > a {
-    background-color: rgba(0, 0, 0, .1);
-    color: @grayLighter;
+    background-color: @grayLighter;
+    color: @grayLight;
   }
 
   .active {
     a {
       border-color: @white;
       background-color: @white !important;
-      color: @orange !important;
+      color: @grayDark !important;
     }
     i {
       color: @black;
@@ -262,7 +282,7 @@ h1 .count {
   }
 
   a:hover {
-    background-color: rgba(255, 255, 255, .1);
+    background-color: @grayDark;
     border-color: transparent;
   }
 
@@ -296,10 +316,10 @@ body.login #content {
 .inline-search {
   [type=text],
   .btn {
-    background-color: rgba(0, 0, 0, 0.10);
+    background-color: none;
     border-color: transparent;
     box-shadow: none;
-    color: @white;
+    color: @grayLight;
     &:focus {
       box-shadow: none;
       border-color: transparent;
@@ -307,7 +327,7 @@ body.login #content {
   }
   .btn {
     background-image: none;
-    background-color: rgba(0, 0, 0, 0.20);
+    background-color: rgba(0, 0, 0, 0.06);
     text-shadow: none;
   }
   [type=text] {
@@ -316,6 +336,72 @@ body.login #content {
 }
 
 .x-btn {
-  color: @white;
-  border: 2px solid @white;
+  color: @grayLighter;
+  border: 2px solid @grayLighter;
 }
+
+
+// Footer
+#footer {
+
+  .span9 {
+  margin-right: 0px;
+  }
+
+div {
+	padding-bottom: 2px; 	
+	padding-top: 0px;
+    margin-left: -15px;
+    margin-right: 35px;
+  } 
+
+  h1 {
+    font-size: 16px;
+	margin-top: 0px;
+  	margin-bottom: 0px;
+      }
+
+  p {
+    font-size: 12.7px;
+	margin-top: 0px;
+    }
+
+}
+
+#note {
+
+.span12 {
+	margin-left: 20px;
+  }
+
+div {
+	padding-bottom: 15px; 	
+	padding-top: 10px;
+	} 
+
+	p { 
+	   	font-size: 16px;
+    	text-align: right;
+		}
+}
+
+#iframe
+html, body { 
+	height: 100% 
+	}
+
+.iframe-container {
+    overflow: hidden;
+    padding-top: 56.25%;
+    position: relative;
+	}
+
+.iframe-container iframe {
+    border: 0px;
+    height: 100%;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+	bottom: 0px;
+    width: 100%;
+	}
