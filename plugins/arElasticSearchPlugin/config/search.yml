@@ -34,6 +34,9 @@ all:
       analysis:
 
         analyzer:
+          synonym:
+            tokenizer: whitespace
+            filter: [synonym]
           default:
             tokenizer: standard
             filter: [lowercase, preserved_asciifolding]
@@ -73,7 +76,7 @@ all:
             filter: [lowercase, dutch_stop, preserved_asciifolding]
           english:
             tokenizer: standard
-            filter: [lowercase, english_stop, preserved_asciifolding]
+            filter: [lowercase, english_stop, preserved_asciifolding, synonym]
           finnish:
             tokenizer: standard
             filter: [lowercase, finnish_stop, preserved_asciifolding]
@@ -135,6 +138,10 @@ all:
             char_filter: [punctuation_filter]
 
         filter:
+          synonym:
+            type: synonym
+            synonyms: [dr => doutor]
+            tokenizer: whitespace
           engram:
             type: edgeNGram
             min_gram: 3
