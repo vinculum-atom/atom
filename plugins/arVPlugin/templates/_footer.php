@@ -105,6 +105,18 @@
     "descriptionRules": "INTERNATIONAL COUNCIL ON ARCHIVES – ISAD(G): General International Standard Archival Description: adopted by the Committee on Descriptive Standards, Stockolm, Sweden, 19-22 September 1999. 2nd ed. Ottawa: CIA/CDS, 2000. ISBN 0-9696035-5-X \nDIREÇÃO GERAL DE ARQUIVOS; PROGRAMA DE NORMALIZAÇÃO DA DESCRIÇÃO EM ARQUIVO; GRUPO DE TRABALHO DE NORMALIZAÇÃO DA DESCRIÇÃO EM ARQUIVO – Orientações para a descrição arquivística. 2.ª v. Lisboa: DGARQ, 2007, 325 p."
   }
 
+// Acrescentado por Ricardo Pinho (ricardo.pinho@gisvm.com) - 2022.01.29
+
+  async function fillElem(selector, innerhtml){
+    while(!(elem = document.querySelector(selector))) {
+      await new Promise(r => setTimeout(r, 100));
+    }
+    elem.innerHTML = innerhtml;
+    elem.style.display = 'block';
+  }
+
+// Fim do acrescentado por Ricardo Pinho (ricardo.pinho@gisvm.com) - 2022.01.29
+
   var modal = document.createElement('div')
   modal.innerHTML = 'Updating form...'
   modal.classList.add("modal")
@@ -153,14 +165,18 @@
     form = document.querySelector("form[action='/index.php/repository/add']");
     
     if (form) {
-      document.querySelector("#type ~ ul").innerHTML = '<li title="Remove item"><input name="type[]" type="hidden" value="/index.php/community"><span>Corporate Body</span></li>'
-      document.querySelector("#type ~ ul").style.display = 'block'      
 
       form.querySelector("#descRules").value = !form.querySelector("#descRules").value ? defaultValues.archivalAddRules : form.querySelector("#descRules").value
 
-
       form.querySelector("#descStatus").selectedIndex = 3
       form.querySelector("#descDetail").selectedIndex = 2
+
+// Acrescentado por Ricardo Pinho (ricardo.pinho@gisvm.com) - 2022.01.29
+
+      fillElem('#type ~ ul','<li title="Remove item"><input name="type[]" type="hidden" value="/index.php/community"><span>Corporate Body</span></li>');
+
+// Fim do acrescentado por Ricardo Pinho (ricardo.pinho@gisvm.com) - 2022.01.29
+
     }    
 
     // add archival descriptions
@@ -171,13 +187,17 @@
 
       //document.querySelector("label[for='repository']").innerHTML = 'Entail/ Vínculo'
 
-      document.querySelector("#language ~ ul").innerHTML = '<li title="Remove item"><input name="language[]" type="hidden" value="pt"><span>Portuguese</span></li>'
-      document.querySelector("#language ~ ul").style.display = 'block'
-
       form.querySelector("#rules").value = !form.querySelector("#rules").value ? defaultValues.descriptionRules : form.querySelector("#rules").value
 
       form.querySelector("#descriptionStatus").selectedIndex = 3
       form.querySelector("#descriptionDetail").selectedIndex = 2
+
+// Acrescentado por Ricardo Pinho (ricardo.pinho@gisvm.com) - 2022.01.29
+
+      fillElem("#language ~ ul",'<li title="Remove item"><input name="language[]" type="hidden" value="pt"><span>Portuguese</span></li>');
+
+// Fim do acrescentado por Ricardo Pinho (ricardo.pinho@gisvm.com) - 2022.01.29
+
     }
     
     modal.classList.add("modal-close")
