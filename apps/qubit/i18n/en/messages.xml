@@ -66,6 +66,24 @@
   <note>https://github.com/artefactual/atom/blob/master/apps/qubit/modules/settings/templates/visibleElementsSuccess.php</note>
 </trans-unit>
 
+<trans-unit id="d70f93df5e8f9b55be44fbeee9d203972e3383d4">
+  <source>Address</source>
+  <target>Municipality</target>
+  <note>https://github.com/artefactual/atom/blob/master/apps/qubit/modules/contactinformation/templates/_contactInformation.php</note>
+</trans-unit>
+
+<trans-unit id="0f217179940c6d89f5cb2c7002a58d91ab7286c1">
+  <source>Region</source>
+  <target> </target>
+  <note>https://github.com/artefactual/atom/blob/master/apps/qubit/modules/repository/templates/_browseTableView.php</note>
+</trans-unit>
+
+<trans-unit id="e0c96765488cf36f85f9a1292da8700f81577a48">
+  <source>Country name</source>
+  <target>Country</target>
+  <note>https://github.com/artefactual/atom/blob/master/apps/qubit/modules/contactinformation/templates/_contactInformation.php</note>
+</trans-unit>
+
     </body>
   </file>
 </xliff>
