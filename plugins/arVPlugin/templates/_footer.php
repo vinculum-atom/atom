@@ -102,7 +102,10 @@
   var defaultValues = {
     "actorAddRules": "INTERNATIONAL COUNCIL ON ARCHIVES – ISAAR(CPF): International Standard Archival Authority Records for Corporate Bodies, Persons and Families: prepared by The Committee on Descriptive Standards. Ottawa: ICA/CDS, 2004. ISBN: 2-9521932-2-3.",
     "archivalAddRules": "INTERNATIONAL COUNCIL ON ARCHIVES – ISDIAH: International Standard for Describing Institutions with Archival Holdings: First edition: Developed by the Committee on Best Practices and Standards, London, United Kingdom, 10-11 March 2008.",
-    "descriptionRules": "INTERNATIONAL COUNCIL ON ARCHIVES – ISAD(G): General International Standard Archival Description: adopted by the Committee on Descriptive Standards, Stockolm, Sweden, 19-22 September 1999. 2nd ed. Ottawa: CIA/CDS, 2000. ISBN 0-9696035-5-X \nDIREÇÃO GERAL DE ARQUIVOS; PROGRAMA DE NORMALIZAÇÃO DA DESCRIÇÃO EM ARQUIVO; GRUPO DE TRABALHO DE NORMALIZAÇÃO DA DESCRIÇÃO EM ARQUIVO – Orientações para a descrição arquivística. 2.ª v. Lisboa: DGARQ, 2007, 325 p."
+    "descriptionRules": "INTERNATIONAL COUNCIL ON ARCHIVES – ISAD(G): General International Standard Archival Description: adopted by the Committee on Descriptive Standards, Stockolm, Sweden, 19-22 September 1999. 2nd ed. Ottawa: CIA/CDS, 2000. ISBN 0-9696035-5-X \nDIREÇÃO GERAL DE ARQUIVOS; PROGRAMA DE NORMALIZAÇÃO DA DESCRIÇÃO EM ARQUIVO; GRUPO DE TRABALHO DE NORMALIZAÇÃO DA DESCRIÇÃO EM ARQUIVO – Orientações para a descrição arquivística. 2.ª v. Lisboa: DGARQ, 2007, 325 p.",
+    "archivalHoldings": "See Entail Fonds’ AD",
+    "actorGeneralContext": "Documents were gathered from a variety of archival fonds - see Entail Fonds’ AD",
+    "actorHistory": "See related AD"
   }
 
 // Acrescentado por Ricardo Pinho (ricardo.pinho@gisvm.com) - 2022.01.29
@@ -138,6 +141,8 @@
       document.querySelector("label[for='maintainingRepository']").innerHTML = 'Entail/ Vínculo'
 
       form.querySelector("#rules").value = !form.querySelector("#rules").value ? defaultValues.actorAddRules : form.querySelector("#rules").value
+      form.querySelector("#generalContext").value = !form.querySelector("#generalContext").value ? defaultValues.actorGeneralContext : form.querySelector("#generalContext").value
+      form.querySelector("#history").value = !form.querySelector("#history").value ? defaultValues.actorHistory : form.querySelector("#history").value
 
       form.querySelector("#descriptionStatus").selectedIndex = 3
       form.querySelector("#descriptionDetail").selectedIndex = 2
@@ -167,6 +172,7 @@
     if (form) {
 
       form.querySelector("#descRules").value = !form.querySelector("#descRules").value ? defaultValues.archivalAddRules : form.querySelector("#descRules").value
+      form.querySelector("#holdings").value = !form.querySelector("#holdings").value ? defaultValues.archivalHoldings : form.queryselector("#holdings").value
 
       form.querySelector("#descStatus").selectedIndex = 3
       form.querySelector("#descDetail").selectedIndex = 2
